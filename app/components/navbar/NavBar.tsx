@@ -13,7 +13,7 @@ const NavBar = () => {
       <div>IssuesTracker</div>
       <div className="space-x-8">
         {links.map((link) => (
-          <NavLink href={link.href} label={link.label} />
+          <NavLink key={link.label} href={link.href} label={link.label} />
         ))}
       </div>
       <AuthStatus/>

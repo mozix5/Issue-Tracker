@@ -21,13 +21,13 @@ const IssueTable = ({ issues }: { issues: Issue[] }) => {
         <TableHeader>
           <TableRow>
             {columns.map((column) => (
-              <TableHead>{column.label}</TableHead>
+              <TableHead key={column.label}>{column.label}</TableHead>
             ))}
           </TableRow>
         </TableHeader>
         <TableBody>
           {issues.map((issue) => (
-            <TableRow>
+            <TableRow key={issue.id}>
               <TableCell>{issue.title}</TableCell>
               <TableCell>{issue.status}</TableCell>
               <TableCell>{issue.createdAt.toDateString()}</TableCell>
