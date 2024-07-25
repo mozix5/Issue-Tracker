@@ -5,7 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 
-export const AuthOptions: NextAuthOptions = {
+const AuthOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
@@ -44,3 +44,5 @@ export const AuthOptions: NextAuthOptions = {
     strategy: "jwt",
   },
 };
+
+export default AuthOptions;
