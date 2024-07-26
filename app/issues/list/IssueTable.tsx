@@ -16,7 +16,7 @@ export type IssueQuery = {
 
 const IssueTable = ({ issues }: { issues: Issue[] }) => {
   return (
-    <div>
+    <div className="mt-4">
       <Table>
         <TableHeader>
           <TableRow>

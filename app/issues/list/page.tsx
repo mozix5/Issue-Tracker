@@ -15,13 +15,16 @@ const IssuesPage = async ({ searchParams }: Props) => {
     skip: (page - 1) * pageSize,
     take: pageSize,
   });
+  const totalIssues = await prisma.issue.count();
   return (
-    <div className="pt-8">
+    <div className="pt-8 px-48">
       <PageHeader />
       <IssueTable issues={issues} />
-      <div>
-        <Paginator />
-      </div>
+      <Paginator
+        itemCount={totalIssues}
+        pageSize={pageSize}
+        currentPage={page}
+      />
     </div>
   );
 };
