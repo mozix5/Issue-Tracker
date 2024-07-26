@@ -8,13 +8,14 @@ import {
 
 type DropDownProps = {
   options: { id: string; label: string }[];
-  placeholder: string;
+  defaultValue: string;
+  placeholder?: string;
 };
-const DropDown = ({ options, placeholder }: DropDownProps) => {
+const DropDown = ({ options, placeholder,defaultValue }: DropDownProps) => {
   return (
-    <Select>
+    <Select defaultValue={defaultValue}>
       <SelectTrigger className="w-fit capitalize">
-        <SelectValue placeholder={placeholder} />
+        <SelectValue  />
       </SelectTrigger>
       <SelectContent>
         {options.map((option) => (
