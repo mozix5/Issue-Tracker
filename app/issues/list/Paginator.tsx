@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/pagination";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Label } from "@/components/ui/label";
-import DropDown from "./DropDown";
+import DropDown from "../../components/DropDown";
 
 type PaginatorProps = {
   itemCount: number;
@@ -36,10 +36,10 @@ const Paginator = ({ itemCount, currentPage, pageSize }: PaginatorProps) => {
   }));
 
   return (
-    <div className=" flex relative  items-center mt-4">
+    <div className=" flex relative items-center mt-4">
       <div className="flex gap-2 items-center absolute left-0">
         <Label className=" whitespace-nowrap">Page</Label>
-        <DropDown options={pageOptions} placeholder="1" />
+        <DropDown options={pageOptions} defaultValue="1" />
       </div>
       <Pagination className="px-0">
         <PaginationContent>
