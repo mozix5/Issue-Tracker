@@ -9,7 +9,7 @@ const links = [
 
 const NavBar = () => {
   return (
-    <div className="flex justify-between items-center py-4">
+    <div className="flex justify-between items-center py-4 px-48">
       <div>IssuesTracker</div>
       <div className="space-x-8">
         {links.map((link) => (
