@@ -10,7 +10,7 @@ const options = [
 const PageHeader = () => {
   return (
     <div className="flex justify-between">
-      <DropDown placeholder="all" options={options}/>
+      <DropDown defaultValue="all" options={options}/>
       <NavLink href="/issues/new" label="New Issue" variant="default" />
     </div>
   );
