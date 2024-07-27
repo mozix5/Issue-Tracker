@@ -8,12 +8,19 @@ import {
 
 type DropDownProps = {
   options: { id: string; label: string }[];
-  placeholder: string;
+  defaultValue?: string;
+  placeholder?: string;
+  className?: string;
 };
-const DropDown = ({ options, placeholder }: DropDownProps) => {
+const DropDown = ({
+  options,
+  placeholder,
+  defaultValue,
+  className,
+}: DropDownProps) => {
   return (
-    <Select>
-      <SelectTrigger className="w-fit capitalize">
+    <Select defaultValue={defaultValue}>
+      <SelectTrigger className={`capitalize ${className}`}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>

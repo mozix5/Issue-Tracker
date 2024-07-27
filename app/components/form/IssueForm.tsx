@@ -34,11 +34,13 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       setIsSubmitting(true);
       if (issue) {
         await axios.patch("/api/issues/" + issue.id, data);
+        router.push("/issues/" + issue.id);
         toast("Issue updated successfully");
       } else {
         await axios.post("/api/issues", data);
         toast("Issue created successfully");
         router.push("/issues/list");
+        router.refresh();
       }
     } catch (error) {
       setIsSubmitting(false);
@@ -65,7 +67,9 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
-        <Button disabled={isSubmitting}>{issue ? "Update Issue" : "Submit Issue"}</Button>
+        <Button disabled={isSubmitting}>
+          {issue ? "Update Issue" : "Submit Issue"}
+        </Button>
       </form>
     </div>
   );
