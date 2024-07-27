@@ -33,8 +33,7 @@ const IssueTable = ({ issues }: { issues: Issue[] }) => {
                 <NavLink
                   label={issue.title}
                   href={`${issue.id}`}
-                  variant="ghost"
-                  className="px-0 h-0 py-5 w-full justify-start hover:bg-transparent text-sm font-normal"
+                  className="px-0 py-4 h-full w-full flex items-center justify-start text-sm font-normal"
                 />
               </TableCell>
               <TableCell>{issue.status}</TableCell>

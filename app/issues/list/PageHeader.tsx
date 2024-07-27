@@ -9,9 +9,9 @@ const options = [
 ];
 const PageHeader = () => {
   return (
-    <div className="flex justify-between">
-      <DropDown defaultValue="all" options={options} className="w-fit"/>
-      <NavLink href="/issues/new" label="New Issue" variant="default" />
+    <div className="flex justify-between items-center">
+      <DropDown defaultValue="all" options={options} className="w-fit h-10"/>
+      <NavLink href="/issues/new" label="New Issue" className="btn btn-primary min-h-10 h-10"/>
     </div>
   );
 };

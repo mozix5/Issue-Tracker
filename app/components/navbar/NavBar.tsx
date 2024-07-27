@@ -1,6 +1,7 @@
 import React from "react";
 import NavLink from "./NavLink";
 import AuthStatus from "./AuthStatus";
+import { BsBugFill } from "react-icons/bs";
 
 const links = [
   { label: "Dashboard", href: "/" },
@@ -9,11 +10,11 @@ const links = [
 
 const NavBar = () => {
   return (
-    <div className="flex justify-between items-center py-4 px-48">
-      <div>IssuesTracker</div>
-      <div className="space-x-8">
+    <div className="flex justify-between items-center py-4 px-48 space-x-2">
+      <BsBugFill className="text-2xl"/>
+      <div className="flex-1">
         {links.map((link) => (
-          <NavLink key={link.label} href={link.href} label={link.label} />
+          <NavLink key={link.label} href={link.href} label={link.label} className="btn btn-ghost" />
         ))}
       </div>
       <AuthStatus/>
