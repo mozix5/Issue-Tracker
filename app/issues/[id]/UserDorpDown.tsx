@@ -54,7 +54,7 @@ const UserDropDown = ({ assignedToUserId, issueId }: UserDropDownProps) => {
 
   return (
     <Select defaultValue={assignedToUserId || "unassigned"} onValueChange={assignUserToIssue}>
-      <SelectTrigger className="capitalize bg-base-100 focus:ring-0 border-none h-10 rounded-xl">
+      <SelectTrigger className="capitalize bg-base-100 focus:ring-0 border-none h-10 rounded-xl px-4">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
