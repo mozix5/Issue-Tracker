@@ -19,7 +19,7 @@ const LatestIssues = async () => {
       <div className="text-lg font-semibold my-2 px-2">Lates Issues</div>
       {latestIssues.map((latestIssue) => {
         return (
-          <Link href={`/issues/${latestIssue.id}`}>
+          <Link key={latestIssue.id} href={`/issues/${latestIssue.id}`}>
             <div className=" btn-neutral btn flex justify-start h-14 items-center rounded-2xl px-4">
               <div className="flex-1 text-start mx-1">{latestIssue.title}</div>
               <div className=" text-xs">
