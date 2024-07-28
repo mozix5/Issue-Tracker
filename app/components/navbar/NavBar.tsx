@@ -10,7 +10,7 @@ const links = [
 
 const NavBar = () => {
   return (
-    <div className="flex justify-between items-center py-4 px-48 space-x-2">
+    <div className="flex justify-between items-center h-[10vh] px-48 space-x-2">
       <BsBugFill className="text-2xl"/>
       <div className="flex-1">
         {links.map((link) => (

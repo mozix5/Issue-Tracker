@@ -2,7 +2,7 @@ import { GoIssueOpened } from "react-icons/go";
 import { GoIssueClosed } from "react-icons/go";
 import { RiProgress5Line } from "react-icons/ri";
 
-type statusProps = {
+export type StatusProps = {
   status: "OPEN" | "CLOSED" | "IN_PROGRESS";
 };
 
@@ -14,20 +14,22 @@ const buttonVariants = {
   },
   CLOSED: {
     className: "bg-[#4BB543]",
-    icon: <GoIssueClosed />,
+    icon: <GoIssueClosed/>,
     label: "closed",
   },
   IN_PROGRESS: {
     className: "bg-violet-500",
-    icon: <RiProgress5Line />,
+    icon: <RiProgress5Line/>,
     label: "in progress",
   },
 };
 
-const IssueStatusBadge = ({ status }: statusProps) => {
+const IssueStatusBadge = ({ status }: StatusProps) => {
   const { className, icon, label } = buttonVariants[status];
   return (
-    <div className={`text-white flex space-x-1 items-center px-4 py-1 rounded-3xl ${className}`}>
+    <div
+      className={`text-white flex space-x-1 items-center px-4 py-[6px] rounded-3xl ${className}`}
+    >
       {icon}
       <span className="font-medium capitalize">{label}</span>
     </div>
