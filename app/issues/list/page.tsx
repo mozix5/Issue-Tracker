@@ -4,7 +4,7 @@ import PageHeader from "./PageHeader";
 import Paginator from "./Paginator";
 import { cache } from "react";
 import { Status } from "@prisma/client";
-import type { Prisma } from "@prisma/client"; // Import Prisma types
+import type { Prisma } from "@prisma/client";
 
 type Props = {
   searchParams: IssueQuery;
@@ -55,7 +55,6 @@ const IssuesPage = async ({ searchParams }: Props) => {
     where,
     orderBy
   );
-
   return (
     <div className="pt-4 px-48 h-[90vh] flex flex-col">
       <PageHeader />
