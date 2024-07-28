@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type UserDropDownProps = {
   assignedToUserId: string | null;
@@ -49,7 +50,7 @@ const UserDropDown = ({ assignedToUserId, issueId }: UserDropDownProps) => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Skeleton className="h-10 bg-[#ececec]/10"/>;
   }
 
   return (
