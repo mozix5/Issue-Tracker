@@ -9,11 +9,11 @@ import { Input } from "@/components/ui/input";
 import { Issue } from "@prisma/client";
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
-import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import Loader from "../Loader";
 
 type IssueFormData = z.infer<typeof issueSchema>;
 
@@ -52,6 +52,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       <form className="flex flex-col gap-4" onSubmit={onSubmit}>
         <Input
           type="text"
+          className="bg-neutral border-0"
           placeholder="Title"
           defaultValue={issue?.title}
           {...register("title")}
@@ -67,9 +68,17 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
-        <Button disabled={isSubmitting}>
+         {errors.description && (
+          <Label className="text-red-500">{errors.description.message}</Label>
+        )}
+        <button
+          className={`btn btn-primary h-10 min-h-10 rounded-sm ${
+            isSubmitting && "cursor-not-allowed opacity-40"
+          }`}
+        >
+          {isSubmitting && <Loader />}
           {issue ? "Update Issue" : "Submit Issue"}
-        </Button>
+        </button>
       </form>
     </div>
   );
