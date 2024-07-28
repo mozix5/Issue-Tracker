@@ -13,7 +13,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 const IssuesListLoading = () => {
   return (
     <div className="px-48 pt-4">
-      <PageHeader />
+      {/* <PageHeader /> */}
       <div className="pt-4">
         <Table>
           <TableHeader>
