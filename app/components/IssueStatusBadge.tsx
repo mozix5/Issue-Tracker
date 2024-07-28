@@ -4,6 +4,7 @@ import { RiProgress5Line } from "react-icons/ri";
 
 export type StatusProps = {
   status: "OPEN" | "CLOSED" | "IN_PROGRESS";
+  size?:"xs"|"sm"|"md"|"lg"
 };
 
 const buttonVariants = {
@@ -24,11 +25,11 @@ const buttonVariants = {
   },
 };
 
-const IssueStatusBadge = ({ status }: StatusProps) => {
+const IssueStatusBadge = ({ status ,size}: StatusProps) => {
   const { className, icon, label } = buttonVariants[status];
   return (
     <div
-      className={`text-white flex space-x-1 items-center px-4 py-[6px] rounded-3xl ${className}`}
+      className={`text-white flex space-x-1 items-center px-4 py-[6px] rounded-3xl w-fit h-fit text-${size} ${className}`}
     >
       {icon}
       <span className="font-medium capitalize">{label}</span>

@@ -39,7 +39,12 @@ const Paginator = ({ itemCount, currentPage, pageSize }: PaginatorProps) => {
     <div className=" flex relative items-center mt-4">
       <div className="flex gap-2 items-center absolute left-0">
         <Label className=" whitespace-nowrap">Page</Label>
-        <DropDown options={pageOptions} defaultValue="1" />
+        <DropDown
+          options={pageOptions}
+          defaultValue="1"
+          query="page"
+          className="w-fit h-10 bg-[#36434d] rounded-2xl focus:ring-0 border-none"
+        />
       </div>
       <Pagination className="px-0">
         <PaginationContent>
