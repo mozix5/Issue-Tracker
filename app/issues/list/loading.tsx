@@ -1,5 +1,4 @@
 import React from "react";
-import PageHeader from "./PageHeader";
 import {
   Table,
   TableBody,
@@ -13,7 +12,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 const IssuesListLoading = () => {
   return (
     <div className="px-48 pt-4">
-      {/* <PageHeader /> */}
+      <div className="flex justify-between py-2">
+        <Skeleton className="h-8 w-20 bg-[#ececec]/10" />
+        <Skeleton className="h-8 w-32 bg-[#ececec]/10" />
+      </div>
       <div className="pt-4">
         <Table>
           <TableHeader>
