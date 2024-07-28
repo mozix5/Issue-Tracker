@@ -19,7 +19,7 @@ const IssueChart = ({ open, closed, inProgress }: IssueCounts) => {
   return (
     <div className=" w-full h-full py-10 rounded-3xl bg-neutral">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} width={100} barCategoryGap={20}>
+        <BarChart data={data} width={100} barCategoryGap={40}>
           <XAxis
             dataKey="label"
             tickLine={false}
