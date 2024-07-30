@@ -27,10 +27,10 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
       await axios.delete("/api/issues/" + issueId);
       router.push("/issues/list");
       router.refresh();
-      toast("Issue deleted Successfully");
+      toast.success("Issue deleted Successfully");
     } catch (error) {
       setIsDeleting(false);
-      toast("Unexpected error occurred");
+      toast.error("Unexpected error occurred");
     }
   };
   return (
