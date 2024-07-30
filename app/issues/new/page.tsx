@@ -8,7 +8,7 @@ const IssueForm = dynamic(() => import("@/app/components/form/IssueForm"), {
 
 const CreateIssuePage = () => {
   return (
-    <div className="px-48">
+    <div className="px-6 xl:px-48 md:px-16">
       <IssueForm />
     </div>
   );

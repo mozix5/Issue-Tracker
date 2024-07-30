@@ -20,7 +20,7 @@ const page = async () => {
     },
   });
   return (
-    <div className="px-48 font-medium flex space-x-6 pt-4 pb-6 h-[90vh]">
+    <div className="px-6 xl:px-48 md:px-16 font-medium flex flex-col xl:flex-row gap-6 pt-4 pb-6 lg:h-[90vh]">
       <div className="space-y-6 flex flex-col">
         <IssueSummary open={open} closed={closed} inProgress={inProgress} />
         <IssueChart open={open} closed={closed} inProgress={inProgress}/>

@@ -17,7 +17,7 @@ const IssueChart = ({ open, closed, inProgress }: IssueCounts) => {
     { label: "Closed", value: closed },
   ];
   return (
-    <div className=" w-full h-full py-10 rounded-3xl bg-neutral">
+    <div className=" w-full lg:h-full h-[400px] py-10 rounded-3xl bg-neutral">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} width={100} barCategoryGap={40}>
           <XAxis
@@ -26,7 +26,6 @@ const IssueChart = ({ open, closed, inProgress }: IssueCounts) => {
             tickMargin={10}
             axisLine={false}
           />
-          <YAxis tickLine={false} tickMargin={10} axisLine={false} />
           <Tooltip
             cursor={{ fill: "none" }}
             contentStyle={{

@@ -37,7 +37,7 @@ const Paginator = ({ itemCount, currentPage, pageSize }: PaginatorProps) => {
 
   return (
     <div className=" flex relative items-center mt-4">
-      <div className="flex gap-2 items-center absolute left-0">
+      <div className="flex gap-2 items-center md:absolute left-0">
         <Label className=" whitespace-nowrap">Page</Label>
         <DropDown
           options={pageOptions}

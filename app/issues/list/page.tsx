@@ -23,6 +23,14 @@ const fetchIssues = cache(
         skip: (page - 1) * pageSize,
         take: pageSize,
         orderBy,
+        include: {
+          assignedToUser: {
+            select: {
+              name: true,
+              image: true,
+            },
+          },
+        },
       }),
       prisma.issue.count({
         where,
@@ -56,7 +64,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
     orderBy
   );
   return (
-    <div className="pt-4 px-48 h-[90vh] flex flex-col">
+    <div className="pt-4 px-6 xl:px-48 md:px-16 lg:h-[90vh] flex flex-col">
       <PageHeader />
       <div className="h-full">
         <IssueTable issues={issues} searchParams={searchParams} />

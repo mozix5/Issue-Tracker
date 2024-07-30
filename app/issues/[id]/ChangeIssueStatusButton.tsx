@@ -25,9 +25,9 @@ const ChangeIssueStatusButton = async ({
     try {
       await axios.patch("/api/issues/" + issueId, { status: newStatus });
       router.refresh()
-      toast("Status changed successfully");
+      toast.success("Status changed successfully");
     } catch (error) {
-      toast("Unexpected error occurred");
+      toast.error("Unexpected error occurred");
     }
   };
   return (

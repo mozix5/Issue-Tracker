@@ -35,20 +35,20 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       if (issue) {
         await axios.patch("/api/issues/" + issue.id, data);
         router.push("/issues/" + issue.id);
-        toast("Issue updated successfully");
+        toast.success("Issue updated successfully");
       } else {
         await axios.post("/api/issues", data);
-        toast("Issue created successfully");
+        toast.success("Issue created successfully");
         router.push("/issues/list");
         router.refresh();
       }
     } catch (error) {
       setIsSubmitting(false);
-      toast("An unexpected error has occurred");
+      toast.error("An unexpected error has occurred");
     }
   });
   return (
-    <div className=" max-w-xl pt-4">
+    <div className="w-full lg:max-w-xl pt-4">
       <form className="flex flex-col gap-4" onSubmit={onSubmit}>
         <Input
           type="text"
