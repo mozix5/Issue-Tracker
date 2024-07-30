@@ -5,6 +5,7 @@ import Paginator from "./Paginator";
 import { cache } from "react";
 import { Status } from "@prisma/client";
 import type { Prisma } from "@prisma/client";
+import IssuesListLoading from "./loading";
 
 type Props = {
   searchParams: IssueQuery;
@@ -23,6 +24,14 @@ const fetchIssues = cache(
         skip: (page - 1) * pageSize,
         take: pageSize,
         orderBy,
+        include: {
+          assignedToUser: {
+            select: {
+              name: true,
+              image: true,
+            },
+          },
+        },
       }),
       prisma.issue.count({
         where,
