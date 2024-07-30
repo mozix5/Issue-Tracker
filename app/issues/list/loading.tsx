@@ -11,7 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const IssuesListLoading = () => {
   return (
-    <div className="px-48 pt-4">
+    <div className="px-6 xl:px-48 md:px-16 pt-4">
       <div className="flex justify-between py-2">
         <Skeleton className="h-8 w-20 rounded-xl bg-[#ececec]/10" />
         <Skeleton className="h-8 w-32 rounded-xl bg-[#ececec]/10" />
@@ -22,8 +22,8 @@ const IssuesListLoading = () => {
             <TableRow className="bg-base-300">
               <TableHead className="px-4">Issue</TableHead>
               <TableHead className="px-4">status</TableHead>
-              <TableHead className="px-4">Assigned To</TableHead>
-              <TableHead className="px-4">Created</TableHead>
+              <TableHead className="px-4 hidden md:table-cell">Assigned To</TableHead>
+              <TableHead className="px-4 hidden lg:table-cell">Created</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -35,10 +35,10 @@ const IssuesListLoading = () => {
                 <TableCell>
                   <Skeleton className="h-5 bg-[#ececec]/10" />
                 </TableCell>
-                <TableCell className="space-x-2">
+                <TableCell className="space-x-2 hidden md:table-cell">
                   <Skeleton className="h-5 bg-[#ececec]/10" />
                 </TableCell>
-                <TableCell className="rounded-r-xl">
+                <TableCell className="rounded-r-xl hidden lg:table-cell">
                   <Skeleton className="h-5 bg-[#ececec]/10" />
                 </TableCell>
               </TableRow>

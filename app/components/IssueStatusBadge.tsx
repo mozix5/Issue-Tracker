@@ -32,7 +32,7 @@ const IssueStatusBadge = ({ status ,size}: StatusProps) => {
       className={`text-white flex space-x-1 items-center px-4 py-[6px] rounded-3xl w-fit h-fit text-${size} ${className}`}
     >
       {icon}
-      <span className="font-medium capitalize">{label}</span>
+      <span className="font-medium capitalize whitespace-nowrap">{label}</span>
     </div>
   );
 };

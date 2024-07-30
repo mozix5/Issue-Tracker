@@ -48,7 +48,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
     }
   });
   return (
-    <div className=" max-w-xl pt-4">
+    <div className="w-full lg:max-w-xl pt-4">
       <form className="flex flex-col gap-4" onSubmit={onSubmit}>
         <Input
           type="text"

@@ -3,7 +3,7 @@ import React from "react";
 
 const IssueDetailPageLoading = () => {
   return (
-    <div className="px-48 pt-6">
+    <div className="px-6 xl:px-48 md:px-16 pt-6">
       <div className=" bg-neutral space-y-4 rounded-l-2xl p-6">
         <Skeleton className="h-5 w-[30vw] bg-[#ececec]/10" />
         <div className="flex space-x-4">

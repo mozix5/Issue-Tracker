@@ -37,7 +37,7 @@ const IssueTable = ({
         <TableHeader>
           <TableRow className="bg-base-300">
             {columns.map((column) => (
-              <TableHead key={column.label}>
+              <TableHead key={column.label} className={column.className} >
                 <Link
                   href={{
                     query: {
@@ -67,7 +67,7 @@ const IssueTable = ({
               <TableCell>
                 <IssueStatusBadge size="xs" status={issue.status} />
               </TableCell>
-              <TableCell>
+              <TableCell className="hidden md:table-cell">
                 {issue.assignedToUser?.name || "Unassigned"}
                 {issue.assignedToUser?.image && (
                   <img
@@ -77,7 +77,7 @@ const IssueTable = ({
                   />
                 )}
               </TableCell>
-              <TableCell className="rounded-r-xl">
+              <TableCell className="rounded-r-xl hidden lg:table-cell">
                 {new Date(issue.createdAt).toLocaleDateString()}
               </TableCell>
             </TableRow>
@@ -94,9 +94,9 @@ const columns: {
   className?: string;
 }[] = [
   { label: "Issue", value: "title" },
-  { label: "Status", value: "status", className: "hidden md:table-cell" },
+  { label: "Status", value: "status" },
   { label: "Assigned To", value: "assignedToUser", className: "hidden md:table-cell" },
-  { label: "Created", value: "createdAt", className: "hidden md:table-cell" },
+  { label: "Created", value: "createdAt", className: "hidden lg:table-cell" },
 ];
 
 export const columnNames = columns.map((column) => column.value);
