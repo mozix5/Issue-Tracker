@@ -5,7 +5,6 @@ import Paginator from "./Paginator";
 import { cache } from "react";
 import { Status } from "@prisma/client";
 import type { Prisma } from "@prisma/client";
-import IssuesListLoading from "./loading";
 
 type Props = {
   searchParams: IssueQuery;
