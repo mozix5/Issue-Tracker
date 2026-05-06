@@ -1,4 +1,5 @@
 import IssueStatusBadge, { StatusProps } from "./components/IssueStatusBadge";
+import { Status } from "@/lib/types";
 
 export type IssueCounts = {
   open: number;
@@ -7,22 +8,22 @@ export type IssueCounts = {
 };
 
 export type StatusCard = {
-  status: StatusProps["status"];
+  status: Status;
   count: number;
 };
 
 const IssueSummary = ({ open, closed, inProgress }: IssueCounts) => {
   const statsData: StatusCard[] = [
     {
-      status: "OPEN",
+      status: Status.OPEN,
       count: open,
     },
     {
-      status: "CLOSED",
+      status: Status.CLOSED,
       count: closed,
     },
     {
-      status: "IN_PROGRESS",
+      status: Status.IN_PROGRESS,
       count: inProgress,
     },
   ];

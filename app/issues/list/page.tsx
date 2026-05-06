@@ -3,7 +3,7 @@ import IssueTable, { columnNames, IssueQuery } from "./IssueTable";
 import PageHeader from "./PageHeader";
 import Paginator from "./Paginator";
 import { cache } from "react";
-import { Status } from "@prisma/client";
+import { Status } from "@/lib/types";
 import type { Prisma } from "@prisma/client";
 
 type Props = {

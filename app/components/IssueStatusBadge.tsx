@@ -2,8 +2,10 @@ import { GoIssueOpened } from "react-icons/go";
 import { GoIssueClosed } from "react-icons/go";
 import { RiProgress5Line } from "react-icons/ri";
 
+import { Status } from "@/lib/types";
+
 export type StatusProps = {
-  status: "OPEN" | "CLOSED" | "IN_PROGRESS";
+  status: Status;
   size?:"xs"|"sm"|"md"|"lg"
 };
 
