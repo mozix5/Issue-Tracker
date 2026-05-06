@@ -1,5 +1,7 @@
 import prisma from "@/prisma/client";
 import IssueStatusBadge from "./components/IssueStatusBadge";
+import PriorityBadge from "./components/PriorityBadge";
+import { Status, Priority } from "@/lib/types";
 import Link from "next/link";
 
 const LatestIssues = async () => {
@@ -12,6 +14,7 @@ const LatestIssues = async () => {
       id: true,
       title: true,
       status: true,
+      priority: true,
     },
   });
   return (
@@ -22,8 +25,9 @@ const LatestIssues = async () => {
           <Link key={latestIssue.id} href={`/issues/${latestIssue.id}`}>
             <div className="btn-neutral btn flex justify-start h-16 items-center rounded-2xl px-4">
               <div className="flex-1 text-start mr-4">{latestIssue.title}</div>
-              <div className="text-xs">
-                <IssueStatusBadge status={latestIssue.status} />
+              <div className="text-xs flex gap-2">
+                <PriorityBadge priority={latestIssue.priority as Priority} />
+                <IssueStatusBadge status={latestIssue.status as Status} />
               </div>
             </div>
           </Link>

@@ -15,20 +15,63 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Loader from "../Loader";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { priorities } from "@/lib/types";
+import { Sparkles } from "lucide-react";
+
 type IssueFormData = z.infer<typeof issueSchema>;
 
 const IssueForm = ({ issue }: { issue?: Issue }) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isTriaging, setIsTriaging] = useState(false);
 
   const {
     register,
     control,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<IssueFormData>({
     resolver: zodResolver(issueSchema),
+    defaultValues: {
+      priority: issue?.priority || "MEDIUM",
+    },
   });
+
+  const triageIssue = async () => {
+    const title = watch("title");
+    const description = watch("description");
+
+    if (!title || !description) {
+      toast.error("Please provide both title and description for AI triage");
+      return;
+    }
+
+    try {
+      setIsTriaging(true);
+      const { data } = await axios.post("/api/issues/triage", {
+        title,
+        description,
+      });
+      setValue("priority", data.priority);
+      toast.success(`AI suggests: ${data.priority} priority`, {
+        description: data.reason,
+      });
+    } catch (error) {
+      toast.error("AI Triage failed");
+    } finally {
+      setIsTriaging(false);
+    }
+  };
+
   const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSubmitting(true);
@@ -47,19 +90,60 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       toast.error("An unexpected error has occurred");
     }
   });
+
   return (
     <div className="w-full lg:max-w-xl pt-4">
       <form className="flex flex-col gap-4" onSubmit={onSubmit}>
-        <Input
-          type="text"
-          className="bg-neutral border-0"
-          placeholder="Title"
-          defaultValue={issue?.title}
-          {...register("title")}
-        />
+        <div className="flex gap-2">
+          <Input
+            type="text"
+            className="bg-neutral border-0 flex-1"
+            placeholder="Title"
+            defaultValue={issue?.title}
+            {...register("title")}
+          />
+          <button
+            type="button"
+            onClick={triageIssue}
+            disabled={isTriaging}
+            className="btn btn-neutral h-10 min-h-10 px-3 flex gap-2"
+          >
+            {isTriaging ? (
+              <Loader />
+            ) : (
+              <>
+                <Sparkles size={16} className="text-yellow-400" />
+                <span className="hidden sm:inline">AI Triage</span>
+              </>
+            )}
+          </button>
+        </div>
         {errors.title && (
           <Label className="text-red-500">{errors.title.message}</Label>
         )}
+
+        <div className="flex flex-col gap-2">
+          <Label className="text-sm font-medium opacity-70">Priority</Label>
+          <Controller
+            name="priority"
+            control={control}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} value={field.value}>
+                <SelectTrigger className="bg-neutral border-0 h-10">
+                  <SelectValue placeholder="Select Priority" />
+                </SelectTrigger>
+                <SelectContent className="bg-neutral border-0">
+                  {priorities.map((p) => (
+                    <SelectItem key={p} value={p}>
+                      {p}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
+        </div>
+
         <Controller
           name="description"
           control={control}
@@ -68,7 +152,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
-         {errors.description && (
+        {errors.description && (
           <Label className="text-red-500">{errors.description.message}</Label>
         )}
         <button

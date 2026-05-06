@@ -1,4 +1,6 @@
 import IssueStatusBadge from "@/app/components/IssueStatusBadge";
+import PriorityBadge from "@/app/components/PriorityBadge";
+import { Priority, Status } from "@/lib/types";
 import { Issue } from "@prisma/client";
 
 const IssueDetails = ({ issueDetails }: { issueDetails: Issue }) => {
@@ -7,7 +9,8 @@ const IssueDetails = ({ issueDetails }: { issueDetails: Issue }) => {
       <div className="">
         <div className=" text-3xl font-medium">{issueDetails?.title}</div>
         <div className="flex gap-4 items-center mt-3">
-          <IssueStatusBadge status={issueDetails.status} />
+          <IssueStatusBadge status={issueDetails.status as Status} />
+          <PriorityBadge priority={issueDetails.priority as Priority} />
           <div className="text-sm font-medium">
             {issueDetails?.createdAt!.toDateString()}
           </div>

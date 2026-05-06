@@ -1,4 +1,5 @@
 import IssueStatusBadge from "@/app/components/IssueStatusBadge";
+import PriorityBadge from "@/app/components/PriorityBadge";
 import NavLink from "@/app/components/navbar/NavLink";
 import {
   Table,
@@ -8,7 +9,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Issue, Status } from "@prisma/client";
+import { Issue } from "@prisma/client";
+import { Status, Priority } from "@/lib/types";
 import Link from "next/link";
 
 export type IssueQuery = {
@@ -65,7 +67,10 @@ const IssueTable = ({
                 />
               </TableCell>
               <TableCell>
-                <IssueStatusBadge size="xs" status={issue.status} />
+                <IssueStatusBadge size="xs" status={issue.status as Status} />
+              </TableCell>
+              <TableCell className="hidden md:table-cell">
+                <PriorityBadge size="xs" priority={issue.priority as Priority} />
               </TableCell>
               <TableCell className="hidden md:table-cell">
                 {issue.assignedToUser?.name || "Unassigned"}
@@ -95,6 +100,7 @@ const columns: {
 }[] = [
   { label: "Issue", value: "title" },
   { label: "Status", value: "status" },
+  { label: "Priority", value: "priority", className: "hidden md:table-cell" },
   { label: "Assigned To", value: "assignedToUser", className: "hidden md:table-cell" },
   { label: "Created", value: "createdAt", className: "hidden lg:table-cell" },
 ];
