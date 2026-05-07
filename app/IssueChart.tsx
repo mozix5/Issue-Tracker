@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { IssueCounts } from "./IssueSummary";
 import {
   Bar,
@@ -11,6 +12,30 @@ import {
 } from "recharts";
 
 const IssueChart = ({ open, closed, inProgress }: IssueCounts) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    
+    // Suppress the Recharts defaultProps warning until they release a stable fix
+    const originalConsoleError = console.error;
+    console.error = (...args: any[]) => {
+      if (typeof args[0] === 'string' && args[0].includes('Support for defaultProps will be removed from function components')) {
+        return;
+      }
+      originalConsoleError(...args);
+    };
+
+    return () => {
+      console.error = originalConsoleError;
+    };
+  }, []);
+
+  if (!isMounted) {
+    // Return a skeleton/placeholder matching the container's dimensions to avoid layout shift
+    return <div className="w-full lg:h-full h-[400px] py-10 rounded-3xl bg-neutral"></div>;
+  }
+
   const data = [
     { label: "Open", value: open },
     { label: "In Progress", value: inProgress },
