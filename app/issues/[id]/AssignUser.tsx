@@ -7,7 +7,7 @@ type AssignUserProps = {
 
 const AssignUser = ({ assignedToUserId, issueId }: AssignUserProps) => {
   return (
-    <div className="w-48">
+    <div className="w-full">
       <UserDropDown assignedToUserId={assignedToUserId} issueId={issueId} />
     </div>
   );

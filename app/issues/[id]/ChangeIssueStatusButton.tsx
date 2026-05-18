@@ -24,16 +24,16 @@ const ChangeIssueStatusButton = async ({
   const changeStatus = async (newStatus: string) => {
     try {
       await axios.patch("/api/issues/" + issueId, { status: newStatus });
-      router.refresh()
+      router.refresh();
       toast.success("Status changed successfully");
     } catch (error) {
       toast.error("Unexpected error occurred");
     }
   };
   return (
-    <div className="w-48">
+    <div className="w-full">
       <Select defaultValue={status} onValueChange={changeStatus}>
-        <SelectTrigger className="capitalize bg-base-100 focus:ring-0 border-none h-10 rounded-xl px-4">
+        <SelectTrigger className="capitalize bg-base-100 focus:ring-0 border-none h-11 rounded-xl px-4 w-full">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>

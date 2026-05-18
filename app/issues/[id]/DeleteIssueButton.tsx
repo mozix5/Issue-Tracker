@@ -35,19 +35,19 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
   };
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
-        <div className="w-48 btn btn-ghost hover:bg-base-200 min-h-10 h-fit">
+      <AlertDialogTrigger asChild>
+        <button className="btn w-full btn-error/10 hover:bg-error/25 text-red-500 border border-red-500/20 text-xs font-bold rounded-xl transition-all duration-200 min-h-11 h-fit flex items-center justify-center gap-2">
           {isDeleting ? (
             <Loader />
           ) : (
             <>
-              <MdDeleteForever className=" text-lg" />
-              <span className="">Delete Issue</span>
+              <MdDeleteForever className="text-lg" />
+              <span>Delete Issue</span>
             </>
           )}
-        </div>
+        </button>
       </AlertDialogTrigger>
-      <AlertDialogContent className=" bg-neutral border-none shadow-xl">
+      <AlertDialogContent className="bg-neutral border-none shadow-xl">
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>

@@ -65,12 +65,12 @@ const UserDropDown = ({ assignedToUserId, issueId }: UserDropDownProps) => {
   };
 
   if (isLoading) {
-    return <Skeleton className="h-10 rounded-xl bg-[#ececec]/10" />;
+    return <Skeleton className="h-10 rounded-xl bg-base-content/10" />;
   }
 
   return (
     <Select defaultValue={assignedToUserId || "unassigned"} onValueChange={assignUserToIssue}>
-      <SelectTrigger className="capitalize bg-base-100 focus:ring-0 border-none h-10 rounded-xl px-4">
+      <SelectTrigger className="capitalize bg-base-100 focus:ring-0 border-none h-11 rounded-xl px-4 w-full">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
