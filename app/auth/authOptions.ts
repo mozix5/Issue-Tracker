@@ -23,15 +23,24 @@ const AuthOptions: NextAuthOptions = {
         },
       },
       async authorize(credentials, req) {
-        if (!credentials?.email || !credentials.password) return null;
+        console.log("NextAuth Authorize triggered:", credentials);
+        if (!credentials?.email || !credentials.password) {
+          console.log("NextAuth Authorize: Missing email or password");
+          return null;
+        }
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
-        if (!user) return null;
+        if (!user) {
+          console.log(`NextAuth Authorize: User not found for email ${credentials.email}`);
+          return null;
+        }
+        console.log(`NextAuth Authorize: Found user ${user.email}, comparing password...`);
         const passwordMatch = await bcrypt.compare(
           credentials.password,
           user.hashedPassword!
         );
+        console.log(`NextAuth Authorize: Password match result is ${passwordMatch}`);
         return passwordMatch ? user : null;
       },
     }),

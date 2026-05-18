@@ -18,12 +18,12 @@ model Issue {
   updatedAt        DateTime @updatedAt
   assignedToUserId String?
   assignedToUser   User?    @relation(fields: [assignedToUserId], references: [id])
+  comments         Comment[]
 
   @@index([status])
   @@index([createdAt])
   @@index([assignedToUserId])
 }
-
 
 model Account {
   id                String  @id @default(cuid())
@@ -65,6 +65,7 @@ model User {
   accounts       Account[]
   sessions       Session[]
   assignedIssues Issue[]
+  comments       Comment[]
 
   @@index([email])
 }
@@ -76,4 +77,22 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@index([identifier])
+}
+
+model Comment {
+  id        Int       @id @default(autoincrement())
+  text      String
+  createdAt DateTime  @default(now())
+  issueId   Int
+  issue     Issue     @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  userId    String?
+  user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parentId  Int?
+  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies   Comment[] @relation("CommentReplies")
+  upvotes   Int       @default(0) // Persistent vote counter!
+
+  @@index([issueId])
+  @@index([userId])
+  @@index([parentId])
 }
