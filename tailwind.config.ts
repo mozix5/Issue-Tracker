@@ -79,7 +79,7 @@ const config = {
     require("daisyui")
   ],
   daisyui: {
-    themes: ["sunset"],
+    themes: ["dim", "sunset", "nord", "coffee"],
   },
 } satisfies Config;
 
