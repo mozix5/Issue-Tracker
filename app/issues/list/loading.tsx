@@ -13,8 +13,8 @@ const IssuesListLoading = () => {
   return (
     <div className="px-6 xl:px-48 md:px-16 pt-4">
       <div className="flex justify-between py-2">
-        <Skeleton className="h-8 w-20 rounded-xl bg-[#ececec]/10" />
-        <Skeleton className="h-8 w-32 rounded-xl bg-[#ececec]/10" />
+        <Skeleton className="h-8 w-20 rounded-xl bg-base-content/10" />
+        <Skeleton className="h-8 w-32 rounded-xl bg-base-content/10" />
       </div>
       <div className="pt-4">
         <Table>
@@ -28,18 +28,18 @@ const IssuesListLoading = () => {
           </TableHeader>
           <TableBody>
             {[...Array(8)].map((_, index) => (
-              <TableRow key={index} className="even:bg-[#36434d]/10">
+              <TableRow key={index} className="even:bg-base-200/40">
                 <TableCell className="px-4 py-3 rounded-l-xl">
-                  <Skeleton className="h-5 bg-[#ececec]/10" />
+                  <Skeleton className="h-5 bg-base-content/10" />
                 </TableCell>
                 <TableCell>
-                  <Skeleton className="h-5 bg-[#ececec]/10" />
+                  <Skeleton className="h-5 bg-base-content/10" />
                 </TableCell>
                 <TableCell className="space-x-2 hidden md:table-cell">
-                  <Skeleton className="h-5 bg-[#ececec]/10" />
+                  <Skeleton className="h-5 bg-base-content/10" />
                 </TableCell>
                 <TableCell className="rounded-r-xl hidden lg:table-cell">
-                  <Skeleton className="h-5 bg-[#ececec]/10" />
+                  <Skeleton className="h-5 bg-base-content/10" />
                 </TableCell>
               </TableRow>
             ))}
