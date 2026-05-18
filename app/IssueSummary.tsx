@@ -1,4 +1,5 @@
-import IssueStatusBadge, { StatusProps } from "./components/IssueStatusBadge";
+import { GoIssueOpened, GoIssueClosed } from "react-icons/go";
+import { RiProgress5Line } from "react-icons/ri";
 import { Status } from "@/lib/types";
 
 export type IssueCounts = {
@@ -10,6 +11,11 @@ export type IssueCounts = {
 export type StatusCard = {
   status: Status;
   count: number;
+  label: string;
+  colorClass: string;
+  bgGradClass: string;
+  hoverBorderClass: string;
+  icon: React.ReactNode;
 };
 
 const IssueSummary = ({ open, closed, inProgress }: IssueCounts) => {
@@ -17,27 +23,59 @@ const IssueSummary = ({ open, closed, inProgress }: IssueCounts) => {
     {
       status: Status.OPEN,
       count: open,
-    },
-    {
-      status: Status.CLOSED,
-      count: closed,
+      label: "Open Issues",
+      colorClass: "text-red-500",
+      bgGradClass: "from-red-500/10 to-red-500/2",
+      hoverBorderClass: "hover:border-red-500/30",
+      icon: <GoIssueOpened className="text-2xl text-red-500" />,
     },
     {
       status: Status.IN_PROGRESS,
       count: inProgress,
+      label: "In Progress",
+      colorClass: "text-primary",
+      bgGradClass: "from-primary/10 to-primary/2",
+      hoverBorderClass: "hover:border-primary/30",
+      icon: (
+        <RiProgress5Line className="text-2xl text-primary animate-spin-slow" />
+      ),
+    },
+    {
+      status: Status.CLOSED,
+      count: closed,
+      label: "Closed Issues",
+      colorClass: "text-emerald-500",
+      bgGradClass: "from-emerald-500/10 to-emerald-500/2",
+      hoverBorderClass: "hover:border-emerald-500/30",
+      icon: <GoIssueClosed className="text-2xl text-emerald-500" />,
     },
   ];
+
   return (
-    <div className="gap-2 flex md:flex-nowrap flex-wrap">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
       {statsData.map((card: StatusCard) => {
         return (
-          <div key={card.status} className="btn h-fit py-4 font-medium text-base flex-col items-start rounded-3xl btn-neutral shadow-xl flex-grow">
-            <div className="flex items-center space-x-2">
-              <IssueStatusBadge status={card.status} />
-              <span className="text-sm font-semibold hidden md:block">Issues</span>
+          <div
+            key={card.status}
+            className={`relative overflow-hidden rounded-3xl p-6 bg-gradient-to-br ${card.bgGradClass} bg-base-200 border border-base-content/10 shadow-xl transition-all duration-300 hover:scale-[1.02] ${card.hoverBorderClass} flex flex-col justify-between min-h-[140px]`}
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-bold text-base-content/75 uppercase tracking-wider">
+                {card.label}
+              </span>
+              <div className="p-2 rounded-2xl bg-base-100 border border-base-content/10">
+                {card.icon}
+              </div>
             </div>
-            <div className=" text-[oklch(var(--p))] text-6xl font-bold h-fit">
-              {card.count}
+            <div className="mt-4 flex items-baseline gap-2">
+              <span
+                className={`text-5xl font-black tracking-tight ${card.colorClass}`}
+              >
+                {card.count}
+              </span>
+              <span className="text-xs font-bold text-base-content/50 uppercase">
+                active
+              </span>
             </div>
           </div>
         );
