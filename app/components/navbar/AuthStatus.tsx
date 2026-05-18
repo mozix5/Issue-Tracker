@@ -22,7 +22,7 @@ const AuthStatus = () => {
     );
   }
   if (status === "loading") {
-    return <Skeleton className="h-10 w-10 rounded-full bg-[#ececec]/10" />;
+    return <Skeleton className="h-10 w-10 rounded-full bg-base-content/10" />;
   }
 
   return (
@@ -35,14 +35,22 @@ const AuthStatus = () => {
           </AvatarFallback>
         </Avatar>
       </PopoverTrigger>
-      <PopoverContent className="bg-base-300 border-none rounded-2xl">
-        <div className="py-4 px-2 text-neutral-content">
-          {session?.user?.email}
+      <PopoverContent className="bg-base-200 border border-base-content/10 rounded-3xl shadow-2xl p-3 w-56 z-[100]">
+        <div className="flex flex-col px-2 py-1.5 mb-2.5 border-b border-base-content/5 gap-0.5">
+          <span className="text-[9px] font-black text-base-content/50 uppercase tracking-widest">
+            Active Session
+          </span>
+          <span className="text-xs font-black text-base-content truncate">
+            {session?.user?.name || "User Account"}
+          </span>
+          <span className="text-[10px] font-medium text-base-content/60 truncate">
+            {session?.user?.email}
+          </span>
         </div>
         <NavLink
           label="Log out"
           href="/api/auth/signout"
-          className=" btn btn-warning w-full min-h-10 h-10"
+          className="btn btn-warning w-full min-h-9 h-9 rounded-xl text-xs font-bold uppercase tracking-wider"
         />
       </PopoverContent>
     </Popover>
