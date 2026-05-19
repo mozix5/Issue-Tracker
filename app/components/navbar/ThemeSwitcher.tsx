@@ -42,7 +42,7 @@ const ThemeSwitcher = () => {
         role="button"
         className="btn btn-ghost rounded-2xl flex items-center gap-2 border border-base-content/5 hover:bg-base-200"
       >
-        <Palette size={15} className="text-primary" />
+        <Palette size={15} className="text-base-content/80" />
         <span className="text-[10px] font-black uppercase tracking-widest hidden md:inline">
           Theme
         </span>
