@@ -34,6 +34,68 @@ export async function PATCH(
   if (!issue)
     return NextResponse.json({ error: "Invalid issue" }, { status: 404 });
 
+  const dbUser = await prisma.user.findUnique({
+    where: { email: session.user?.email! }
+  });
+
+  const logs = [];
+  if (title !== undefined && title !== issue.title) {
+    logs.push({
+      issueId: issue.id,
+      userId: dbUser?.id,
+      userName: dbUser?.name,
+      action: "TITLE_CHANGE",
+      oldValue: issue.title,
+      newValue: title,
+    });
+  }
+  if (description !== undefined && description !== issue.description) {
+    logs.push({
+      issueId: issue.id,
+      userId: dbUser?.id,
+      userName: dbUser?.name,
+      action: "DESCRIPTION_CHANGE",
+      oldValue: issue.description,
+      newValue: description,
+    });
+  }
+  if (status !== undefined && status !== issue.status) {
+    logs.push({
+      issueId: issue.id,
+      userId: dbUser?.id,
+      userName: dbUser?.name,
+      action: "STATUS_CHANGE",
+      oldValue: issue.status,
+      newValue: status,
+    });
+  }
+  if (priority !== undefined && priority !== issue.priority) {
+    logs.push({
+      issueId: issue.id,
+      userId: dbUser?.id,
+      userName: dbUser?.name,
+      action: "PRIORITY_CHANGE",
+      oldValue: issue.priority,
+      newValue: priority,
+    });
+  }
+  if (assignedToUserId !== undefined && assignedToUserId !== issue.assignedToUserId) {
+    const oldAssignee = issue.assignedToUserId
+      ? await prisma.user.findUnique({ where: { id: issue.assignedToUserId } })
+      : null;
+    const newAssignee = assignedToUserId
+      ? await prisma.user.findUnique({ where: { id: assignedToUserId } })
+      : null;
+    logs.push({
+      issueId: issue.id,
+      userId: dbUser?.id,
+      userName: dbUser?.name,
+      action: "ASSIGNEE_CHANGE",
+      oldValue: oldAssignee?.name || "Unassigned",
+      newValue: newAssignee?.name || "Unassigned",
+    });
+  }
+
   const updatedIssue = await prisma.issue.update({
     where: { id: issue.id },
     data: {
@@ -44,6 +106,12 @@ export async function PATCH(
       priority,
     },
   });
+
+  if (logs.length > 0) {
+    await prisma.activityLog.createMany({
+      data: logs,
+    });
+  }
 
   return NextResponse.json(updatedIssue);
 }

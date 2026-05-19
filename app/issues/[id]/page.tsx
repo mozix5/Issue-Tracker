@@ -9,6 +9,7 @@ import ChangeIssueStatusButton from "./ChangeIssueStatusButton";
 import { getServerSession } from "next-auth";
 import AuthOptions from "@/app/auth/authOptions";
 import CommentsSection from "./CommentsSection";
+import ActivityLogSection from "./ActivityLogSection";
 
 const getIssue = cache(async (id: string) => {
   const res = await prisma.issue.findUnique({
@@ -30,6 +31,7 @@ const IssuePage = async ({ params }: { params: { id: string } }) => {
     <div className="px-4 md:px-8 max-w-7xl mx-auto py-8 flex flex-col lg:flex-row gap-6 min-h-[90vh]">
       <div className="flex-1 flex flex-col gap-6">
         <IssueDetails issueDetails={issue} />
+        <ActivityLogSection issueId={issue.id} />
         <CommentsSection issueId={params.id} />
       </div>
       {session && (
