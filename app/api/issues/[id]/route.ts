@@ -3,6 +3,7 @@ import { patchIssueSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
+import { sendAssigneeNotification } from "@/lib/mail";
 
 export async function PATCH(
   request: NextRequest,
@@ -111,6 +112,23 @@ export async function PATCH(
     await prisma.activityLog.createMany({
       data: logs,
     });
+  }
+
+  if (assignedToUserId !== undefined && assignedToUserId !== issue.assignedToUserId && assignedToUserId) {
+    const newAssignee = await prisma.user.findUnique({ where: { id: assignedToUserId } });
+    if (newAssignee && newAssignee.email) {
+      try {
+        await sendAssigneeNotification(
+          newAssignee.email,
+          newAssignee.name || "User",
+          issue.id,
+          updatedIssue.title,
+          dbUser?.name || "Someone"
+        );
+      } catch (err) {
+        console.error("Failed to send assignee email notification:", err);
+      }
+    }
   }
 
   return NextResponse.json(updatedIssue);

@@ -2,6 +2,7 @@ import IssueStatusBadge from "@/app/components/IssueStatusBadge";
 import PriorityBadge from "@/app/components/PriorityBadge";
 import { Priority, Status } from "@/lib/types";
 import { Issue } from "@prisma/client";
+import ReactMarkdown from "react-markdown";
 
 const IssueDetails = ({ issueDetails }: { issueDetails: Issue }) => {
   return (
@@ -16,8 +17,8 @@ const IssueDetails = ({ issueDetails }: { issueDetails: Issue }) => {
           </div>
         </div>
       </div>
-      <div className="p-6 mt-8 rounded-2xl bg-base-100 border border-base-content/5 min-h-20 text-base-content/90 leading-relaxed">
-        {issueDetails?.description}
+      <div className="p-6 mt-8 rounded-2xl bg-base-100 border border-base-content/5 min-h-20 leading-relaxed prose max-w-none">
+        <ReactMarkdown>{issueDetails?.description}</ReactMarkdown>
       </div>
     </div>
   );

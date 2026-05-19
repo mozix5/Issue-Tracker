@@ -83,3 +83,23 @@
   color: hsl(var(--bc)) !important;
 }
 
+/* Tailwind Typography Theme integration */
+.prose {
+  --tw-prose-body: hsl(var(--bc)) !important;
+  --tw-prose-headings: hsl(var(--bc)) !important;
+  --tw-prose-lead: hsl(var(--bc)) !important;
+  --tw-prose-links: hsl(var(--p)) !important;
+  --tw-prose-bold: hsl(var(--bc)) !important;
+  --tw-prose-counters: hsl(var(--bc) / 0.6) !important;
+  --tw-prose-bullets: hsl(var(--bc) / 0.6) !important;
+  --tw-prose-hr: hsl(var(--bc) / 0.1) !important;
+  --tw-prose-quotes: hsl(var(--bc) / 0.8) !important;
+  --tw-prose-quote-borders: hsl(var(--bc) / 0.2) !important;
+  --tw-prose-captions: hsl(var(--bc) / 0.6) !important;
+  --tw-prose-code: hsl(var(--bc)) !important;
+  --tw-prose-pre-code: hsl(var(--b1)) !important;
+  --tw-prose-pre-bg: hsl(var(--b3)) !important;
+  --tw-prose-th-borders: hsl(var(--bc) / 0.2) !important;
+  --tw-prose-td-borders: hsl(var(--bc) / 0.1) !important;
+}
+

@@ -2,6 +2,7 @@ import authOptions from "@/app/auth/authOptions";
 import prisma from "@/prisma/client";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
+import { sendCommentNotification } from "@/lib/mail";
 
 export async function GET(
   request: NextRequest,
@@ -80,6 +81,36 @@ export async function POST(
       },
     },
   });
+
+  // Fetch issue and assignee details
+  const issue = await prisma.issue.findUnique({
+    where: { id: issueId },
+    include: {
+      assignedToUser: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        }
+      }
+    }
+  });
+
+  if (issue?.assignedToUser && issue.assignedToUser.email && issue.assignedToUser.id !== userId) {
+    try {
+      const commenterName = session?.user?.name || "Someone";
+      await sendCommentNotification(
+        issue.assignedToUser.email,
+        issue.assignedToUser.name || "User",
+        issueId,
+        issue.title,
+        commenterName,
+        newComment.text
+      );
+    } catch (err) {
+      console.error("Failed to send comment email notification:", err);
+    }
+  }
 
   return NextResponse.json(newComment, { status: 201 });
 }
