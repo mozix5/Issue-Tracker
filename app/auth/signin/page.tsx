@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import { FaSpinner } from "react-icons/fa";
 import { Eye, EyeOff } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 
-const SignInPage = () => {
+const SignInForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
@@ -150,5 +150,11 @@ const SignInPage = () => {
     </div>
   );
 };
+
+const SignInPage = () => (
+  <Suspense>
+    <SignInForm />
+  </Suspense>
+);
 
 export default SignInPage;
