@@ -14,11 +14,18 @@ const AuthStatus = () => {
   const { status, data: session } = useSession();
   if (status === "unauthenticated") {
     return (
-      <NavLink
-        href="/api/auth/signin"
-        label="login"
-        className="btn btn-ghost"
-      />
+      <div className="flex items-center gap-2">
+        <NavLink
+          href="/auth/signin"
+          label="Sign In"
+          className="btn btn-ghost text-xs font-bold"
+        />
+        <NavLink
+          href="/auth/signup"
+          label="Sign Up"
+          className="btn btn-primary !text-white text-xs font-black rounded-2xl h-9 min-h-9 px-4"
+        />
+      </div>
     );
   }
   if (status === "loading") {

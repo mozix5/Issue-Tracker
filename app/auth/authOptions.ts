@@ -9,38 +9,20 @@ const AuthOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
-      name: "Crednetials",
+      name: "Credentials",
       credentials: {
-        email: {
-          label: "email",
-          type: "email",
-          placeholder: "Eg. abc@gmail.com",
-        },
-        password: {
-          label: "Password",
-          type: "password",
-          placeholder: "password",
-        },
+        email: { label: "Email", type: "email", placeholder: "you@example.com" },
+        password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
-        console.log("NextAuth Authorize triggered:", credentials);
-        if (!credentials?.email || !credentials.password) {
-          console.log("NextAuth Authorize: Missing email or password");
-          return null;
-        }
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials.password) return null;
+
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
-        if (!user) {
-          console.log(`NextAuth Authorize: User not found for email ${credentials.email}`);
-          return null;
-        }
-        console.log(`NextAuth Authorize: Found user ${user.email}, comparing password...`);
-        const passwordMatch = await bcrypt.compare(
-          credentials.password,
-          user.hashedPassword!
-        );
-        console.log(`NextAuth Authorize: Password match result is ${passwordMatch}`);
+        if (!user || !user.hashedPassword) return null;
+
+        const passwordMatch = await bcrypt.compare(credentials.password, user.hashedPassword);
         return passwordMatch ? user : null;
       },
     }),
@@ -49,16 +31,13 @@ const AuthOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-  session: {
-    strategy: "jwt",
+  session: { strategy: "jwt" },
+  pages: {
+    signIn: "/auth/signin",
   },
   callbacks: {
-    async signIn() {
-      return true;
-    },
-    async redirect({ url, baseUrl }) {
-      return baseUrl;
-    },
+    async signIn() { return true; },
+    async redirect({ url, baseUrl }) { return baseUrl; },
   },
 };
 

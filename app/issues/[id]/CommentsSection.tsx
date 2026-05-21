@@ -111,7 +111,7 @@ const CommentsSection = ({ issueId }: CommentsSectionProps) => {
             You must be signed in to join the discussion.
           </span>
           <Link
-            href="/api/auth/signin"
+            href="/auth/signin"
             className="btn btn-primary !text-white text-[10px] font-extrabold rounded-lg transition-colors uppercase tracking-wider min-h-0 h-8 flex items-center px-4"
           >
             Sign In
