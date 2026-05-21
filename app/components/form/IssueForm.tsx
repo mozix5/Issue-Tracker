@@ -106,14 +106,15 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
             type="button"
             onClick={triageIssue}
             disabled={isTriaging}
-            className="btn btn-neutral h-10 min-h-10 px-3 flex gap-2"
+            className="relative h-10 min-h-10 px-4 rounded-xl flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white overflow-hidden transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-violet-600 via-purple-500 to-amber-500 shadow-md hover:shadow-violet-500/30 hover:shadow-lg"
           >
+            <span className="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
             {isTriaging ? (
               <Loader />
             ) : (
               <>
-                <Sparkles size={16} className="text-yellow-400" />
-                <span className="hidden sm:inline">AI Triage</span>
+                <Sparkles size={14} className="text-yellow-300 drop-shadow-[0_0_4px_rgba(253,224,71,0.8)]" />
+                <span className="hidden sm:inline relative z-10">AI Triage</span>
               </>
             )}
           </button>
