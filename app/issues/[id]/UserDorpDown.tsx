@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cache, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -26,8 +27,10 @@ type UserOptions = {
 };
 
 const UserDropDown = ({ assignedToUserId, issueId }: UserDropDownProps) => {
+  const router = useRouter();
   const [userOptions, setUserOptions] = useState<UserOptions[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAssigning, setIsAssigning] = useState(false);
 
   useEffect(() => {
     const fetchUsers = cache(async () => {
@@ -50,10 +53,12 @@ const UserDropDown = ({ assignedToUserId, issueId }: UserDropDownProps) => {
   }, []);
 
   const assignUserToIssue = async (userId: string) => {
+    setIsAssigning(true);
     try {
       await axios.patch("/api/issues/" + issueId, {
         assignedToUserId: userId === "unassigned" ? null : userId,
       });
+      router.refresh();
       if (userId === "unassigned") {
         toast.success("User unassigned successfully");
       } else {
@@ -61,6 +66,8 @@ const UserDropDown = ({ assignedToUserId, issueId }: UserDropDownProps) => {
       }
     } catch (error) {
       toast.error("User could not be assigned");
+    } finally {
+      setIsAssigning(false);
     }
   };
 
@@ -69,9 +76,16 @@ const UserDropDown = ({ assignedToUserId, issueId }: UserDropDownProps) => {
   }
 
   return (
-    <Select defaultValue={assignedToUserId || "unassigned"} onValueChange={assignUserToIssue}>
-      <SelectTrigger className="capitalize bg-base-100 focus:ring-0 border-none h-11 rounded-xl px-4 w-full">
-        <SelectValue />
+    <Select defaultValue={assignedToUserId || "unassigned"} onValueChange={assignUserToIssue} disabled={isAssigning}>
+      <SelectTrigger className="capitalize bg-base-100 focus:ring-0 border-none h-11 rounded-xl px-4 w-full flex items-center justify-between">
+        {isAssigning ? (
+          <div className="flex items-center gap-2">
+            <span className="loading loading-spinner loading-xs text-primary"></span>
+            <span className="text-xs text-base-content/50">Assigning...</span>
+          </div>
+        ) : (
+          <SelectValue />
+        )}
       </SelectTrigger>
       <SelectContent>
         {userOptions.map((option) => (
