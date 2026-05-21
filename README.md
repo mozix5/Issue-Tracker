@@ -1,36 +1,130 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Issue Tracker
+
+A full-stack, AI-powered issue tracking application built with Next.js 14. Create, manage, and triage software issues with a polished UI and real-time Kanban board.
+
+---
+
+## Features
+
+- **Issue Management** — Create, edit, delete, and filter issues with status and priority tracking
+- **AI Triage** — Uses Google Gemini to automatically suggest priority levels based on issue content
+- **Kanban Board** — Drag-and-drop board with live status updates
+- **Comments and Threads** — Threaded comment system with voting and reply support
+- **Activity Log** — Full audit trail of every change made to an issue
+- **Authentication** — Email/password credentials and Google OAuth via NextAuth
+- **Role-based Access** — Unauthenticated users can view issues; actions require sign-in
+- **Theme Switcher** — Multiple DaisyUI themes with live preview
+- **Responsive Design** — Mobile-first layout across all pages
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 14 (App Router) |
+| Styling | Tailwind CSS + DaisyUI |
+| Database | PostgreSQL via Supabase |
+| ORM | Prisma |
+| Auth | NextAuth v4 (Credentials + Google) |
+| AI | Google Gemini (`@google/generative-ai`) |
+| Forms | React Hook Form + Zod |
+| Drag and Drop | `@hello-pangea/dnd` |
+| Charts | Recharts |
+| Markdown | SimpleMDE + react-markdown |
+| Notifications | Sonner |
+| Deployment | Vercel |
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- A [Supabase](https://supabase.com) project (PostgreSQL)
+- A [Google Cloud](https://console.cloud.google.com) OAuth app
+- A [Google AI Studio](https://aistudio.google.com) API key
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/issue-tracker.git
+cd issue-tracker
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env` file in the project root:
+
+```env
+# Database (Supabase connection pooler URL)
+DATABASE_URL="postgresql://..."
+
+# NextAuth
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="your-secret-here"
+
+# Google OAuth
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+
+# Google Gemini AI
+GEMINI_API_KEY="your-gemini-api-key"
+```
+
+> Generate `NEXTAUTH_SECRET` with `openssl rand -base64 32`
+
+### 4. Push the database schema
+
+```bash
+npx prisma db push
+```
+
+### 5. Start the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Project Structure
 
-## Learn More
+```
+app/
+├── api/                  # API routes (issues, comments, auth, AI triage)
+├── auth/                 # Custom sign-in and sign-up pages
+├── components/           # Shared UI components (Navbar, Toast, Forms)
+├── issues/
+│   ├── [id]/             # Issue detail page with comments and activity log
+│   ├── board/            # Kanban board
+│   └── list/             # Filterable issue list
+├── globals.css           # Global styles and SimpleMDE overrides
+├── page.tsx              # Dashboard with charts and quick actions
+└── layout.tsx            # Root layout with providers
+prisma/
+└── schema.prisma         # Database schema
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+This app is configured for Vercel. The `postinstall` script automatically runs `prisma generate && prisma db push` on every deploy.
 
-## Deploy on Vercel
+Add all environment variables from the section above to your Vercel project settings before deploying.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+
+MIT
