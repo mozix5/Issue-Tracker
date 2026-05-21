@@ -141,7 +141,7 @@ const CommentCard = ({
       <div className={`relative flex gap-3 pl-1 py-3 group rounded-2xl transition-all duration-700 ${
         isHighlighted ? "bg-primary/10 scale-[1.005] px-3" : ""
       } ${
-        depth > 0 ? "ml-6 md:ml-8 pl-3 md:pl-4 mt-0.5" : ""
+        depth > 0 ? "ml-6 md:ml-8 border-l border-primary/20 group-hover:border-primary/50 pl-3 md:pl-4 mt-0.5 transition-colors" : ""
       }`}>
         
         <Avatar className="w-8 h-8 flex-shrink-0 z-10">
