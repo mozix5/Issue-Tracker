@@ -55,11 +55,14 @@
 .CodeMirror {
   background: hsl(var(--b2)) !important;
   color: hsl(var(--bc)) !important;
-  border: none !important;
+  border-width: 0 !important;
+  border-style: none !important;
 }
 
-.CodeMirror-cursor {
-  border-left: 2px solid hsl(var(--bc)) !important;
+.CodeMirror .CodeMirror-cursor {
+  border-left-width: 2px !important;
+  border-left-style: solid !important;
+  border-left-color: hsl(var(--bc)) !important;
 }
 
 .editor-toolbar {
