@@ -40,7 +40,7 @@ const CommentForm = ({ onSubmit }: CommentFormProps) => {
       <button
         type="submit"
         disabled={isSubmitting || !text.trim()}
-        className="self-end btn btn-primary text-primary-content text-xs font-bold rounded-lg transition-all duration-200 uppercase tracking-widest flex items-center gap-1.5 h-10 min-h-0"
+        className="self-end btn btn-primary !text-white text-xs font-black rounded-2xl transition-all duration-200 uppercase tracking-widest flex items-center gap-1.5 h-10 min-h-10 px-5"
       >
         {isSubmitting && <FaSpinner className="animate-spin" />}
         Comment
