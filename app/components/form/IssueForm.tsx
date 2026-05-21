@@ -97,7 +97,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
         <div className="flex gap-2">
           <Input
             type="text"
-            className="bg-neutral border-0 flex-1"
+            className="bg-base-200 text-base-content border-0 flex-1"
             placeholder="Title"
             defaultValue={issue?.title}
             {...register("title")}
@@ -129,10 +129,10 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
             control={control}
             render={({ field }) => (
               <Select onValueChange={field.onChange} value={field.value}>
-                <SelectTrigger className="bg-neutral border-0 h-10">
+                <SelectTrigger className="bg-base-200 text-base-content border-0 h-10">
                   <SelectValue placeholder="Select Priority" />
                 </SelectTrigger>
-                <SelectContent className="bg-neutral border-0">
+                <SelectContent className="bg-base-200 text-base-content border-0">
                   {priorities.map((p) => (
                     <SelectItem key={p} value={p}>
                       {p}
