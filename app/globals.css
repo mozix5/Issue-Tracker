@@ -25,8 +25,8 @@
     --accent: var(--a);
     --accent-foreground: var(--ac);
     
-    --destructive: var(--er);
-    --destructive-foreground: var(--erc);
+    --destructive: 346.8 77.2% 49.8%;
+    --destructive-foreground: 355.7 100% 97.3%;
     
     --border: var(--bc) / 0.15;
     --input: var(--bc) / 0.15;
