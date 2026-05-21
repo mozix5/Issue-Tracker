@@ -45,7 +45,6 @@ const CommentCard = ({
   const [isSubmittingReply, setIsSubmittingReply] = useState(false);
   const [replyError, setReplyError] = useState("");
 
-  // Upvotes state
   const [upvotes, setUpvotes] = useState(comment.upvotes || 0);
   const [userVote, setUserVote] = useState<"up" | "down" | null>(null);
 
@@ -77,7 +76,6 @@ const CommentCard = ({
       });
     } catch (err) {
       console.error("Failed to persist vote", err);
-      // Revert on error
       setUpvotes((prev) => prev - diff);
       setUserVote(previousVote);
     }
@@ -141,12 +139,12 @@ const CommentCard = ({
   return (
     <div id={`comment-${comment.id}`} className="relative flex flex-col gap-1 w-full mt-1">
       <div className={`relative flex gap-3 pl-1 py-3 group rounded-2xl transition-all duration-700 ${
-        isHighlighted ? "bg-primary/10 scale-[1.005] ring-1 ring-primary/30 px-3" : ""
+        isHighlighted ? "bg-primary/10 scale-[1.005] px-3" : ""
       } ${
-        depth > 0 ? "ml-6 md:ml-8 border-l-[1.5px] border-base-content/20 hover:border-primary pl-3 md:pl-4 mt-0.5" : ""
+        depth > 0 ? "ml-6 md:ml-8 pl-3 md:pl-4 mt-0.5" : ""
       }`}>
         
-        <Avatar className="w-8 h-8 flex-shrink-0 z-10 border border-base-content/10">
+        <Avatar className="w-8 h-8 flex-shrink-0 z-10">
           <AvatarImage src={comment.user?.image || undefined} />
           <AvatarFallback className="bg-base-200 text-base-content/50 text-xs">
             <FaUserCircle className="text-xl" />
@@ -169,7 +167,7 @@ const CommentCard = ({
           </p>
 
           <div className="flex flex-wrap items-center gap-3.5 mt-2 pl-0.5">
-            <div className="flex items-center bg-base-100 rounded-full border border-base-content/10 overflow-hidden h-[24px]">
+            <div className="flex items-center bg-base-100 rounded-full overflow-hidden h-[24px]">
               <button
                 onClick={() => handleVote("up")}
                 className={`px-2 h-full flex items-center justify-center transition-colors ${
@@ -232,7 +230,7 @@ const CommentCard = ({
                   value={replyText}
                   onChange={(e) => setReplyText(e.target.value)}
                   placeholder="Reply to this thread..."
-                  className="textarea textarea-bordered w-full h-16 bg-base-100 rounded-xl p-2.5 text-base-content placeholder-base-content/40 text-xs focus:outline-none focus:ring-0 transition-all resize-none"
+                  className="textarea border-none w-full h-16 bg-base-100 rounded-xl p-2.5 text-base-content placeholder-base-content/40 text-xs focus:outline-none focus:ring-0 transition-all resize-none"
                   maxLength={1000}
                   disabled={isSubmittingReply}
                 />
@@ -249,7 +247,7 @@ const CommentCard = ({
                 <button
                   type="submit"
                   disabled={isSubmittingReply || !replyText.trim()}
-                  className="px-3 py-1 btn btn-primary text-primary-content min-h-0 h-8 text-[10px] font-black rounded-md transition-all uppercase tracking-widest flex items-center gap-1"
+                  className="px-3 py-1 btn btn-primary !text-white min-h-0 h-8 text-[10px] font-black rounded-md transition-all uppercase tracking-widest flex items-center gap-1"
                 >
                   {isSubmittingReply && <FaSpinner className="animate-spin" />}
                   Reply

@@ -20,7 +20,7 @@ const LatestIssues = async () => {
   });
 
   return (
-    <div className="w-full p-6 rounded-3xl bg-base-200 border border-base-content/10 shadow-xl flex flex-col h-full justify-between">
+    <div className="w-full p-6 rounded-3xl bg-base-200 shadow-xl flex flex-col h-full justify-between">
       <div className="flex items-center justify-between mb-6">
         <div className="flex flex-col">
           <span className="text-sm font-bold text-base-content/75 uppercase tracking-wider">
@@ -47,7 +47,7 @@ const LatestIssues = async () => {
           latestIssues.map((latestIssue) => {
             return (
               <Link key={latestIssue.id} href={`/issues/${latestIssue.id}`}>
-                <div className="group flex items-center justify-between p-4 rounded-2xl bg-primary/5 border border-primary/20 hover:bg-base-100 hover:border-base-content/10 transition-all duration-300">
+                <div className="group flex items-center justify-between p-4 rounded-2xl bg-primary/5 hover:bg-base-100 transition-all duration-300">
                   <div className="flex flex-col gap-1 flex-1 min-w-0 pr-3">
                     <span className="text-sm font-semibold text-base-content truncate">
                       {latestIssue.title}

@@ -32,7 +32,7 @@ const CommentForm = ({ onSubmit }: CommentFormProps) => {
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="What are your thoughts?"
-        className="textarea textarea-bordered w-full h-20 bg-base-100 rounded-2xl p-3.5 text-base-content placeholder-base-content/40 text-xs focus:outline-none focus:ring-0 transition-all resize-none"
+        className="textarea border-none w-full h-20 bg-base-100 rounded-2xl p-3.5 text-base-content placeholder-base-content/40 text-xs focus:outline-none focus:ring-0 transition-all resize-none"
         maxLength={1000}
         disabled={isSubmitting}
       />

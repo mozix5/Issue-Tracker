@@ -53,9 +53,9 @@
 
 /* EasyMDE/SimpleMDE Dark Mode adjustments */
 .CodeMirror {
-  background: hsl(var(--b2)) !important; /* base-200 */
-  color: hsl(var(--bc)) !important; /* base-content */
-  border-color: hsl(var(--bc) / 0.15) !important;
+  background: hsl(var(--b2)) !important;
+  color: hsl(var(--bc)) !important;
+  border: none !important;
 }
 
 .CodeMirror-cursor {
@@ -63,8 +63,8 @@
 }
 
 .editor-toolbar {
-  background: hsl(var(--b3)) !important; /* base-300 */
-  border-color: hsl(var(--bc) / 0.15) !important;
+  background: hsl(var(--b3)) !important;
+  border: none !important;
   opacity: 0.9;
 }
 
@@ -75,12 +75,13 @@
 .editor-toolbar button:hover,
 .editor-toolbar button.active {
   background: hsl(var(--b1)) !important;
-  border-color: hsl(var(--bc) / 0.15) !important;
+  border: none !important;
 }
 
 .editor-preview {
   background: hsl(var(--b2)) !important;
   color: hsl(var(--bc)) !important;
+  border: none !important;
 }
 
 /* Tailwind Typography Theme integration */

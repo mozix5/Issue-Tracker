@@ -37,9 +37,9 @@ const IssuePage = async ({ params }: { params: { id: string } }) => {
         <CommentsSection issueId={params.id} />
       </div>
       {session && (
-        <div className="lg:w-72 flex flex-col gap-5 p-6 bg-base-200 border border-base-content/10 shadow-xl rounded-3xl h-fit items-stretch">
-          <div className="flex items-center gap-3 border-b border-base-content/10 pb-4 mb-1">
-            <div className="p-2.5 rounded-2xl bg-primary/10 border border-primary/20 text-primary">
+        <div className="lg:w-72 flex flex-col gap-5 p-6 bg-base-200 shadow-xl rounded-3xl h-fit items-stretch">
+          <div className="flex items-center gap-3 pb-4 mb-1">
+            <div className="p-2.5 rounded-2xl bg-primary/10 text-primary">
               <Sliders size={15} />
             </div>
             <div className="flex flex-col">
@@ -72,7 +72,7 @@ const IssuePage = async ({ params }: { params: { id: string } }) => {
             />
           </div>
 
-          <div className="border-t border-base-content/10 my-1"></div>
+          <div className="h-2"></div>
 
           <div className="flex flex-col gap-2.5">
             <EditIssueButton issueId={params.id} />

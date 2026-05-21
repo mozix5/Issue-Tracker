@@ -13,20 +13,19 @@ const links = [
 
 const NavBar = () => {
   return (
-    <div className="flex justify-between items-center h-[10vh] px-4 md:px-16 xl:px-48 space-x-2 border-b border-base-content/5 bg-base-100/50 backdrop-blur-md sticky top-0 z-[100]">
+    <div className="flex justify-between items-center h-[10vh] px-4 md:px-16 xl:px-48 space-x-2 bg-base-100/50 backdrop-blur-md sticky top-0 z-[100]">
       <div className="flex items-center gap-3">
-        {/* Mobile Hamburger Menu */}
         <div className="dropdown md:hidden z-[110]">
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-square rounded-2xl border border-base-content/5 hover:bg-base-200"
+            className="btn btn-ghost btn-square rounded-2xl hover:bg-base-200"
           >
             <Menu size={18} />
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content mt-3 z-[110] p-2 shadow-2xl bg-base-200 border border-base-content/10 rounded-3xl w-48 gap-1"
+            className="dropdown-content mt-3 z-[110] p-2 shadow-2xl bg-base-200 rounded-3xl w-48 gap-1"
           >
             {links.map((link) => (
               <li key={link.label} className="w-full">
@@ -42,14 +41,13 @@ const NavBar = () => {
 
         <BsBugFill className="text-2xl text-primary" />
         
-        {/* Desktop Links */}
         <div className="hidden md:flex gap-1">
           {links.map((link) => (
             <NavLink
               key={link.label}
               href={link.href}
               label={link.label}
-              className="btn btn-ghost rounded-2xl border border-base-content/5 hover:bg-base-200"
+              className="btn btn-ghost rounded-2xl hover:bg-base-200"
             />
           ))}
         </div>

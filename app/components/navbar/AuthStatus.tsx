@@ -35,8 +35,8 @@ const AuthStatus = () => {
           </AvatarFallback>
         </Avatar>
       </PopoverTrigger>
-      <PopoverContent className="bg-base-200 border border-base-content/10 rounded-3xl shadow-2xl p-3 w-56 z-[100]">
-        <div className="flex flex-col px-2 py-1.5 mb-2.5 border-b border-base-content/5 gap-0.5">
+      <PopoverContent className="bg-base-200 rounded-3xl shadow-2xl p-3 w-56 z-[100]">
+        <div className="flex flex-col px-2 py-1.5 mb-2.5 gap-0.5">
           <span className="text-[9px] font-black text-base-content/50 uppercase tracking-widest">
             Active Session
           </span>

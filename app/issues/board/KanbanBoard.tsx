@@ -78,7 +78,7 @@ const KanbanBoard = ({ initialIssues }: KanbanBoardProps) => {
               key={column.id}
               className="flex flex-col flex-1 min-w-[320px] max-h-[100%]"
             >
-              <div className="flex items-center justify-between py-3 px-1 border-b border-base-content/10 shrink-0 mb-4">
+              <div className="flex items-center justify-between py-3 px-1 shrink-0 mb-4">
                 <div className="flex items-center gap-2">
                   <h2 className="text-sm font-black uppercase tracking-widest text-base-content">
                     {column.title}
@@ -109,10 +109,10 @@ const KanbanBoard = ({ initialIssues }: KanbanBoardProps) => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            className={`mb-3 p-4 bg-base-100 rounded-2xl border border-base-content/10 shadow-sm transition-all flex flex-col gap-3 ${
+                            className={`mb-3 p-4 bg-base-100 rounded-2xl shadow-sm transition-all flex flex-col gap-3 ${
                               snapshot.isDragging
                                 ? "shadow-xl ring-2 ring-primary scale-[1.02] rotate-1"
-                                : "hover:border-primary/30 hover:shadow-md"
+                                : "hover:shadow-md"
                             }`}
                           >
                             <Link href={`/issues/${issue.id}`} className="block">
@@ -124,7 +124,7 @@ const KanbanBoard = ({ initialIssues }: KanbanBoardProps) => {
                             <div className="flex items-center justify-between mt-2">
                               <PriorityBadge priority={issue.priority as Priority} />
                               
-                              <Avatar className="w-6 h-6 border border-base-content/10">
+                              <Avatar className="w-6 h-6">
                                 {issue.assignedToUser?.image ? (
                                   <AvatarImage src={issue.assignedToUser.image} />
                                 ) : (

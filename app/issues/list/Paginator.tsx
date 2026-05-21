@@ -43,7 +43,7 @@ const Paginator = ({ itemCount, currentPage, pageSize }: PaginatorProps) => {
           options={pageOptions}
           defaultValue="1"
           query="page"
-          className="w-fit h-10 bg-base-200 border border-base-content/10 rounded-2xl focus:ring-0 text-base-content text-xs font-bold px-4 hover:bg-base-300 transition-colors cursor-pointer"
+          className="w-fit h-10 bg-base-200 rounded-2xl focus:ring-0 text-base-content text-xs font-bold px-4 hover:bg-base-300 transition-colors cursor-pointer"
         />
       </div>
       <Pagination className="px-0">

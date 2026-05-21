@@ -36,7 +36,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <button className="btn w-full btn-error/10 hover:bg-error/25 text-red-500 border border-red-500/20 text-xs font-bold rounded-xl transition-all duration-200 min-h-11 h-fit flex items-center justify-center gap-2">
+        <button className="btn w-full btn-error/10 hover:bg-error/25 text-red-500 text-xs font-bold rounded-xl transition-all duration-200 min-h-11 h-fit flex items-center justify-center gap-2">
           {isDeleting ? (
             <Loader />
           ) : (

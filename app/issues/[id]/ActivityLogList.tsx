@@ -96,13 +96,13 @@ const ActivityLogList = ({ logs, initialCount = 3 }: Props) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="relative pl-6 border-l border-base-content/10 flex flex-col gap-6 ml-3 py-1 transition-all duration-300">
+      <div className="relative pl-6 flex flex-col gap-6 ml-3 py-1 transition-all duration-300">
         {displayLogs.map((log) => (
           <div
             key={log.id}
             className="relative flex flex-col gap-1 text-sm text-base-content/80 animate-in fade-in slide-in-from-top-1 duration-200"
           >
-            <div className="absolute -left-[35px] top-0.5 w-6 h-6 rounded-full bg-base-200 border border-base-content/10 flex items-center justify-center shadow-sm">
+            <div className="absolute -left-[35px] top-0.5 w-6 h-6 rounded-full bg-base-200 flex items-center justify-center shadow-sm">
               {getIcon(log.action)}
             </div>
 

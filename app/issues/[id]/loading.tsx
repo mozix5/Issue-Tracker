@@ -4,13 +4,13 @@ import React from "react";
 const IssueDetailPageLoading = () => {
   return (
     <div className="px-6 xl:px-48 md:px-16 pt-6">
-      <div className="bg-base-200 border border-base-content/10 shadow-xl space-y-4 rounded-3xl p-6">
+      <div className="bg-base-200 shadow-xl space-y-4 rounded-3xl p-6">
         <Skeleton className="h-5 w-[30vw] bg-base-content/10" />
         <div className="flex space-x-4">
           <Skeleton className="h-5 w-28 bg-base-content/10" />
           <Skeleton className="h-5 w-32 bg-base-content/10" />
         </div>
-        <div className="p-6 mt-16 rounded-2xl bg-base-100 border border-base-content/5 min-h-20 space-y-4">
+        <div className="p-6 mt-16 rounded-2xl bg-base-100 min-h-20 space-y-4">
           <Skeleton className="h-5 w-[50vw] bg-base-content/10" />
           <Skeleton className="h-5 w-[50vw] bg-base-content/10" />
           <Skeleton className="h-5 w-[50vw] bg-base-content/10" />

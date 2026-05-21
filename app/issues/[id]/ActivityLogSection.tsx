@@ -26,8 +26,8 @@ const ActivityLogSection = async ({ issueId }: Props) => {
   }));
 
   return (
-    <div className="flex flex-col gap-4 bg-base-100 border border-base-content/10 rounded-3xl p-6 shadow-sm">
-      <div className="flex items-center gap-2 border-b border-base-content/5 pb-3">
+    <div className="flex flex-col gap-4 bg-base-100 rounded-3xl p-6 shadow-sm">
+      <div className="flex items-center gap-2 pb-3">
         <Activity size={16} className="text-base-content/70" />
         <h2 className="text-xs font-black uppercase tracking-widest text-base-content/80">
           Activity History
