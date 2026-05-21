@@ -156,7 +156,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           <Label className="text-red-500">{errors.description.message}</Label>
         )}
         <button
-          className={`btn btn-primary h-10 min-h-10 rounded-sm ${
+          className={`btn btn-primary !text-white h-10 min-h-10 rounded-sm ${
             isSubmitting && "cursor-not-allowed opacity-40"
           }`}
         >
