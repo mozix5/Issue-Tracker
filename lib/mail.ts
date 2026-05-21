@@ -1,39 +1,39 @@
 import nodemailer from "nodemailer";
 
 const getTransporter = async () => {
-  // If SMTP environment variables are defined, use them.
   if (
     process.env.SMTP_HOST &&
     process.env.SMTP_PORT &&
     process.env.SMTP_USER &&
     process.env.SMTP_PASS
   ) {
+    const host = process.env.SMTP_HOST;
+    const port = parseInt(process.env.SMTP_PORT);
+    const user = process.env.SMTP_USER;
+    const pass = process.env.SMTP_PASS;
+
+    if (host.includes("gmail") || process.env.SMTP_SERVICE === "gmail") {
+      return nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user,
+          pass,
+        },
+      });
+    }
+
     return nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT),
+      host,
+      port,
+      secure: port === 465,
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user,
+        pass,
       },
     });
   }
 
-  // Fallback: Create a mock transporter using Ethereal Email for local testing
-  try {
-    const testAccount = await nodemailer.createTestAccount();
-    return nodemailer.createTransport({
-      host: "smtp.ethereal.email",
-      port: 587,
-      secure: false,
-      auth: {
-        user: testAccount.user,
-        pass: testAccount.pass,
-      },
-    });
-  } catch (error) {
-    console.error("Failed to create Ethereal testing account, falling back to console mail log.");
-    return null;
-  }
+  return null;
 };
 
 type MailOptions = {
@@ -63,13 +63,7 @@ export const sendEmail = async ({ to, subject, html }: MailOptions) => {
       html,
     });
 
-    // If using local testing smtp.ethereal.email, print the preview URL
-    const previewUrl = nodemailer.getTestMessageUrl(info);
-    if (previewUrl) {
-      console.log(`✉️ Test Email Sent! Preview URL: ${previewUrl}`);
-    } else {
-      console.log(`✉️ Email sent successfully to ${to} (MessageID: ${info.messageId})`);
-    }
+    console.log(`✉️ Email sent successfully to ${to} (MessageID: ${info.messageId})`);
     return info;
   } catch (error) {
     console.error("Error occurred while sending email:", error);

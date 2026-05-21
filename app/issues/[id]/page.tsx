@@ -1,6 +1,8 @@
 import prisma from "@/prisma/client";
 import { notFound } from "next/navigation";
 import { cache } from "react";
+
+export const dynamic = "force-dynamic";
 import IssueDetails from "./IssueDetails";
 import AssignUser from "./AssignUser";
 import DeleteIssueButton from "./DeleteIssueButton";
