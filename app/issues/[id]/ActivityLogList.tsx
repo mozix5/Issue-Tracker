@@ -110,7 +110,7 @@ const ActivityLogList = ({ logs, initialCount = 3 }: Props) => {
               {getMessage(log)}
             </div>
 
-            <span className="text-[10px] text-base-content/40 font-bold uppercase tracking-wider">
+            <span suppressHydrationWarning className="text-[10px] text-base-content/40 font-bold uppercase tracking-wider">
               {formatDistanceToNow(new Date(log.createdAt), { addSuffix: true })}
             </span>
           </div>
