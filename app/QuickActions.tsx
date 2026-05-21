@@ -14,21 +14,21 @@ const QuickActions = () => {
       title: "New Ticket",
       href: "/issues/new",
       icon: <Plus className="text-blue-500 w-4 h-4" />,
-      hoverBg: "hover:bg-blue-500/5",
+      bg: "bg-blue-500/10 hover:bg-blue-500/20",
       requiresAuth: true,
     },
     {
       title: "Open Issues",
       href: "/issues/list?status=OPEN",
       icon: <AlertCircle className="text-red-500 w-4 h-4" />,
-      hoverBg: "hover:bg-red-500/5",
+      bg: "bg-red-500/10 hover:bg-red-500/20",
       requiresAuth: false,
     },
     {
       title: "In Progress",
       href: "/issues/list?status=IN_PROGRESS",
       icon: <Clock className="text-violet-500 w-4 h-4" />,
-      hoverBg: "hover:bg-violet-500/5",
+      bg: "bg-violet-500/10 hover:bg-violet-500/20",
       requiresAuth: false,
     },
   ];
@@ -50,7 +50,7 @@ const QuickActions = () => {
           href={action.href}
           onClick={(e) => handleActionClick(e, action)}
         >
-          <div className={`flex items-center gap-2 px-4 py-2.5 rounded-xl bg-neutral/45 shadow-sm transition-all duration-200 hover:scale-[1.01] hover:shadow-md cursor-pointer text-xs font-semibold text-base-content/90 hover:text-base-content ${action.hoverBg}`}>
+          <div className={`flex items-center gap-2 px-4 py-2.5 rounded-xl shadow-sm transition-all duration-200 hover:scale-[1.01] hover:shadow-md cursor-pointer text-xs font-semibold text-base-content/90 hover:text-base-content ${action.bg}`}>
             {action.icon}
             <span>{action.title}</span>
           </div>
