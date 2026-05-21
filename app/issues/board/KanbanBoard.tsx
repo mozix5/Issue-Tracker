@@ -69,7 +69,7 @@ const KanbanBoard = ({ initialIssues }: KanbanBoardProps) => {
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="flex gap-6 h-full items-start w-full pb-4">
+      <div className="flex gap-6 h-full items-start min-w-max w-full pb-4">
         {columns.map((column) => {
           const columnIssues = issues.filter((issue) => issue.status === column.id);
 

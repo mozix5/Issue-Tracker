@@ -3,6 +3,7 @@ import NavLink from "./NavLink";
 import AuthStatus from "./AuthStatus";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { BsBugFill } from "react-icons/bs";
+import { Menu } from "lucide-react";
 
 const links = [
   { label: "Dashboard", href: "/" },
@@ -12,12 +13,44 @@ const links = [
 
 const NavBar = () => {
   return (
-    <div className="flex justify-between items-center h-[10vh] px-6 xl:px-48 md:px-16 space-x-2">
+    <div className="flex justify-between items-center h-[10vh] px-4 md:px-16 xl:px-48 space-x-2 border-b border-base-content/5 bg-base-100/50 backdrop-blur-md sticky top-0 z-[100]">
       <div className="flex items-center gap-3">
+        {/* Mobile Hamburger Menu */}
+        <div className="dropdown md:hidden z-[110]">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-square rounded-2xl border border-base-content/5 hover:bg-base-200"
+          >
+            <Menu size={18} />
+          </div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content mt-3 z-[110] p-2 shadow-2xl bg-base-200 border border-base-content/10 rounded-3xl w-48 gap-1"
+          >
+            {links.map((link) => (
+              <li key={link.label} className="w-full">
+                <NavLink
+                  href={link.href}
+                  label={link.label}
+                  className="btn btn-ghost w-full justify-start rounded-2xl hover:bg-base-300"
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <BsBugFill className="text-2xl text-primary" />
-        <div className="flex gap-1">
+        
+        {/* Desktop Links */}
+        <div className="hidden md:flex gap-1">
           {links.map((link) => (
-            <NavLink key={link.label} href={link.href} label={link.label} className="btn btn-ghost rounded-2xl border border-base-content/5 hover:bg-base-200" />
+            <NavLink
+              key={link.label}
+              href={link.href}
+              label={link.label}
+              className="btn btn-ghost rounded-2xl border border-base-content/5 hover:bg-base-200"
+            />
           ))}
         </div>
       </div>
