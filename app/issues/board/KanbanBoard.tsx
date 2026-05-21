@@ -94,8 +94,8 @@ const KanbanBoard = ({ initialIssues }: KanbanBoardProps) => {
                   <div
                     ref={provided.innerRef}
                     {...provided.droppableProps}
-                    className={`flex-1 overflow-y-auto p-1 min-h-[150px] rounded-3xl transition-colors ${
-                      snapshot.isDraggingOver ? "bg-base-200/50" : "bg-transparent"
+                    className={`flex-1 overflow-y-auto p-2 min-h-[150px] rounded-3xl transition-colors ${
+                      snapshot.isDraggingOver ? "bg-base-200/30" : "bg-transparent"
                     }`}
                   >
                     {columnIssues.map((issue, index) => (
@@ -109,10 +109,10 @@ const KanbanBoard = ({ initialIssues }: KanbanBoardProps) => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            className={`mb-3 p-4 bg-base-100 rounded-2xl shadow-sm transition-all flex flex-col gap-3 ${
+                            className={`mb-3 p-4 bg-base-200 rounded-2xl shadow-md transition-all flex flex-col gap-3 ${
                               snapshot.isDragging
-                                ? "shadow-xl ring-2 ring-primary scale-[1.02] rotate-1"
-                                : "hover:shadow-md"
+                                ? "shadow-2xl ring-2 ring-primary scale-[1.02] rotate-1"
+                                : "hover:shadow-lg hover:-translate-y-0.5"
                             }`}
                           >
                             <Link href={`/issues/${issue.id}`} className="block">
