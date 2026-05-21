@@ -57,6 +57,7 @@
   color: hsl(var(--bc)) !important;
   border-width: 0 !important;
   border-style: none !important;
+  min-height: 150px !important;
 }
 
 .CodeMirror .CodeMirror-cursor {

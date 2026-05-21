@@ -92,13 +92,13 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
   });
 
   return (
-    <div className="w-full lg:max-w-xl pt-4">
+    <div className="w-full">
       <form className="flex flex-col gap-4" onSubmit={onSubmit}>
         <div className="flex gap-2">
           <Input
             type="text"
-            className="bg-base-200 text-base-content border-0 flex-1"
-            placeholder="Title"
+            className="bg-base-200 text-base-content border-0 flex-1 h-10"
+            placeholder="Issue title"
             defaultValue={issue?.title}
             {...register("title")}
           />
@@ -124,13 +124,13 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
         )}
 
         <div className="flex flex-col gap-2">
-          <Label className="text-sm font-medium opacity-70">Priority</Label>
+          <Label className="text-[10px] font-black uppercase tracking-widest text-base-content/50">Priority</Label>
           <Controller
             name="priority"
             control={control}
             render={({ field }) => (
               <Select onValueChange={field.onChange} value={field.value}>
-                <SelectTrigger className="bg-base-200 text-base-content border-0 h-10">
+                <SelectTrigger className="bg-base-100 text-base-content border-0 h-10 rounded-xl">
                   <SelectValue placeholder="Select Priority" />
                 </SelectTrigger>
                 <SelectContent className="bg-base-200 text-base-content border-0">
@@ -145,19 +145,23 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           />
         </div>
 
-        <Controller
-          name="description"
-          control={control}
-          defaultValue={issue?.description}
-          render={({ field }) => (
-            <SimpleMDE placeholder="Description" {...field} />
+        <div className="flex flex-col gap-2">
+          <Label className="text-[10px] font-black uppercase tracking-widest text-base-content/50">Description</Label>
+          <Controller
+            name="description"
+            control={control}
+            defaultValue={issue?.description}
+            render={({ field }) => (
+              <SimpleMDE placeholder="Describe the issue in detail..." {...field} />
+            )}
+          />
+          {errors.description && (
+            <Label className="text-red-500">{errors.description.message}</Label>
           )}
-        />
-        {errors.description && (
-          <Label className="text-red-500">{errors.description.message}</Label>
-        )}
+        </div>
+
         <button
-          className={`btn btn-primary !text-white h-10 min-h-10 rounded-sm ${
+          className={`btn btn-primary !text-white h-10 min-h-10 rounded-2xl font-black uppercase tracking-widest text-xs ${
             isSubmitting && "cursor-not-allowed opacity-40"
           }`}
         >
