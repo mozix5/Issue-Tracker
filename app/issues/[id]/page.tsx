@@ -1,7 +1,7 @@
 import prisma from "@/prisma/client";
 import { notFound } from "next/navigation";
 import { cache } from "react";
-import { Sliders, UserCircle2, Tag, Pencil, Clock, Hash, Link2 } from "lucide-react";
+import { Sliders, UserCircle2, Tag, Pencil, Clock} from "lucide-react";
 import IssueDetails from "./IssueDetails";
 import AssignUser from "./AssignUser";
 import DeleteIssueButton from "./DeleteIssueButton";

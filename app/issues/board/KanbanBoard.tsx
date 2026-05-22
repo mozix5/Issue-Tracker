@@ -3,8 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
 import axios from "axios";
-import { Issue, User } from "@prisma/client";
-import IssueStatusBadge from "@/app/components/IssueStatusBadge";
+import { Issue} from "@prisma/client";
 import PriorityBadge from "@/app/components/PriorityBadge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUserCircle } from "react-icons/fa";
