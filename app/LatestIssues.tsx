@@ -31,7 +31,7 @@ const LatestIssues = async () => {
           </span>
         </div>
         <Link
-          href="/issues"
+          href="/issues/list"
           className="text-xs font-bold text-base-content/60 hover:text-primary transition-colors flex items-center gap-1"
         >
           View all <GoChevronRight />
