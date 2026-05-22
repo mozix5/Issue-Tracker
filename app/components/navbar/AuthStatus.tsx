@@ -56,7 +56,7 @@ const AuthStatus = () => {
         </div>
         <NavLink
           label="Log out"
-          href="/api/auth/signout"
+          href="/auth/signout"
           className="btn btn-warning w-full min-h-9 h-9 rounded-xl text-xs font-bold uppercase tracking-wider"
         />
       </PopoverContent>
