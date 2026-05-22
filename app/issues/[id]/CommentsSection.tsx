@@ -28,7 +28,7 @@ type CommentsSectionProps = {
 };
 
 const CommentsSection = ({ issueId }: CommentsSectionProps) => {
-  const { data: session, status } = useSession();
+  const {status } = useSession();
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -69,7 +69,7 @@ const CommentsSection = ({ issueId }: CommentsSectionProps) => {
       }
     };
 
-    fetchComments();
+    void fetchComments();
   }, [issueId]);
 
   const handlePostComment = async (text: string) => {

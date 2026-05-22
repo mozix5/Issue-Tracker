@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { cache, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "sonner";
@@ -33,7 +33,7 @@ const UserDropDown = ({ assignedToUserId, issueId }: UserDropDownProps) => {
   const [isAssigning, setIsAssigning] = useState(false);
 
   useEffect(() => {
-    const fetchUsers = cache(async () => {
+    const fetchUsers = async () => {
       try {
         const response = await axios.get("/api/users");
         const users = response.data.map((user: UserOptions) => ({
@@ -47,9 +47,9 @@ const UserDropDown = ({ assignedToUserId, issueId }: UserDropDownProps) => {
       } finally {
         setIsLoading(false);
       }
-    });
+    };
 
-    fetchUsers();
+    void fetchUsers();
   }, []);
 
   const assignUserToIssue = async (userId: string) => {

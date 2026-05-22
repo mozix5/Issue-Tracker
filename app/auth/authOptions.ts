@@ -37,7 +37,7 @@ const AuthOptions: NextAuthOptions = {
   },
   callbacks: {
     async signIn() { return true; },
-    async redirect({ url, baseUrl }) { return baseUrl; },
+    async redirect({baseUrl }) { return baseUrl; },
   },
 };
 

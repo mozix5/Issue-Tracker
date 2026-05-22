@@ -49,23 +49,6 @@ const IssueChart = ({ open, closed, inProgress }: IssueCounts) => {
 
   useEffect(() => {
     setIsMounted(true);
-
-    const originalConsoleError = console.error;
-    console.error = (...args: any[]) => {
-      if (
-        typeof args[0] === "string" &&
-        args[0].includes(
-          "Support for defaultProps will be removed from function components",
-        )
-      ) {
-        return;
-      }
-      originalConsoleError(...args);
-    };
-
-    return () => {
-      console.error = originalConsoleError;
-    };
   }, []);
 
   if (!isMounted) {
