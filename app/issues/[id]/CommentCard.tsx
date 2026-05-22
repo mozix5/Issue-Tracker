@@ -54,6 +54,11 @@ const CommentCard = ({
   const isHighlighted = highlightedCommentId === comment.id;
 
   const handleVote = async (type: "up" | "down") => {
+    if (status !== "authenticated") {
+      toast.error("You must be signed in to vote on comments.");
+      return;
+    }
+
     let diff = 0;
     const previousVote = userVote;
 
