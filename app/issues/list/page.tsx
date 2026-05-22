@@ -1,7 +1,7 @@
 import prisma from "@/prisma/client";
-import IssueTable, { columnNames, IssueQuery } from "./IssueTable";
-import PageHeader from "./PageHeader";
-import Paginator from "./Paginator";
+import IssueTable, { columnNames, IssueQuery } from "./_components/IssueTable";
+import PageHeader from "./_components/PageHeader";
+import Paginator from "./_components/Paginator";
 import { cache } from "react";
 import { Status } from "@/lib/types";
 import type { Prisma } from "@prisma/client";

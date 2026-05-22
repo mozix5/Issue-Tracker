@@ -1,5 +1,5 @@
-import IssueStatusBadge from "@/app/components/IssueStatusBadge";
-import PriorityBadge from "@/app/components/PriorityBadge";
+import IssueStatusBadge from "@/components/issues/IssueStatusBadge";
+import PriorityBadge from "@/components/issues/PriorityBadge";
 import { Priority, Status } from "@/lib/types";
 import { Issue } from "@prisma/client";
 import ReactMarkdown from "react-markdown";

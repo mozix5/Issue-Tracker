@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
 import axios from "axios";
 import { Issue} from "@prisma/client";
-import PriorityBadge from "@/app/components/PriorityBadge";
+import PriorityBadge from "@/components/issues/PriorityBadge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUserCircle } from "react-icons/fa";
 import { Status, Priority } from "@/lib/types";

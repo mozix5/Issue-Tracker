@@ -1,6 +1,6 @@
-import IssueStatusBadge from "@/app/components/IssueStatusBadge";
-import PriorityBadge from "@/app/components/PriorityBadge";
-import NavLink from "@/app/components/navbar/NavLink";
+import IssueStatusBadge from "@/components/issues/IssueStatusBadge";
+import PriorityBadge from "@/components/issues/PriorityBadge";
+import NavLink from "@/components/shared/navbar/NavLink";
 import {
   Table,
   TableBody,

@@ -1,6 +1,6 @@
 import prisma from "@/prisma/client";
-import IssueStatusBadge from "./components/IssueStatusBadge";
-import PriorityBadge from "./components/PriorityBadge";
+import IssueStatusBadge from "@/components/issues/IssueStatusBadge";
+import PriorityBadge from "@/components/issues/PriorityBadge";
 import { Status, Priority } from "@/lib/types";
 import Link from "next/link";
 import { GoChevronRight } from "react-icons/go";

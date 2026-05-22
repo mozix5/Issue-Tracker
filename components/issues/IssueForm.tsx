@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import Loader from "../Loader";
+import Loader from "@/components/shared/Loader";
 
 import {
   Select,

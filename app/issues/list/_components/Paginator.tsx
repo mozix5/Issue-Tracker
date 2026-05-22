@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/pagination";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Label } from "@/components/ui/label";
-import DropDown from "../../components/DropDown";
+import DropDown from "@/components/shared/DropDown";
 
 type PaginatorProps = {
   itemCount: number;

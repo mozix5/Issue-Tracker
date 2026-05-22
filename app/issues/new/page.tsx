@@ -2,12 +2,12 @@ import dynamic from "next/dynamic";
 import IssueFormLoading from "./loading";
 import { getServerSession } from "next-auth";
 import AuthOptions from "@/app/auth/authOptions";
-import Toast from "@/app/components/Toast";
+import Toast from "@/components/shared/Toast";
 import { BsBugFill } from "react-icons/bs";
 import { Sparkles, ListChecks, Zap } from "lucide-react";
-import NoScroll from "@/app/components/NoScroll";
+import NoScroll from "@/components/shared/NoScroll";
 
-const IssueForm = dynamic(() => import("@/app/components/form/IssueForm"), {
+const IssueForm = dynamic(() => import("@/components/issues/IssueForm"), {
   ssr: false,
   loading: () => <IssueFormLoading />,
 });

@@ -2,16 +2,16 @@ import prisma from "@/prisma/client";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { Sliders, UserCircle2, Tag, Pencil, Clock} from "lucide-react";
-import IssueDetails from "./IssueDetails";
-import AssignUser from "./AssignUser";
-import DeleteIssueButton from "./DeleteIssueButton";
-import EditIssueButton from "./EditIssueButton";
-import ChangeIssueStatusButton from "./ChangeIssueStatusButton";
+import IssueDetails from "./_components/IssueDetails";
+import AssignUser from "./_components/AssignUser";
+import DeleteIssueButton from "./_components/DeleteIssueButton";
+import EditIssueButton from "./_components/EditIssueButton";
+import ChangeIssueStatusButton from "./_components/ChangeIssueStatusButton";
 import { getServerSession } from "next-auth";
 import AuthOptions from "@/app/auth/authOptions";
-import CommentsSection from "./CommentsSection";
-import ActivityLogSection from "./ActivityLogSection";
-import CopyLinkButton from "./CopyLinkButton";
+import CommentsSection from "./_components/CommentsSection";
+import ActivityLogSection from "./_components/ActivityLogSection";
+import CopyLinkButton from "./_components/CopyLinkButton";
 
 export const dynamic = "force-dynamic";
 

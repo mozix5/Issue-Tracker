@@ -1,8 +1,8 @@
 import prisma from "@/prisma/client";
-import KanbanBoard from "./KanbanBoard";
+import KanbanBoard from "./_components/KanbanBoard";
 import { getServerSession } from "next-auth";
 import AuthOptions from "@/app/auth/authOptions";
-import Toast from "@/app/components/Toast";
+import Toast from "@/components/shared/Toast";
 
 export const dynamic = "force-dynamic";
 

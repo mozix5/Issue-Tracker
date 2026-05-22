@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import NavBar from "./components/navbar/NavBar";
+import NavBar from "@/components/shared/navbar/NavBar";
 import AuthProvider from "./auth/Provider";
 import { Toaster } from "sonner";
 import QueryClientProvider from "./QueryClientProvider";

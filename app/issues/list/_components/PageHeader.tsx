@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
-import DropDown from "@/app/components/DropDown";
+import DropDown from "@/components/shared/DropDown";
 
 const options = [
   { id: "ALL", label: "all" },

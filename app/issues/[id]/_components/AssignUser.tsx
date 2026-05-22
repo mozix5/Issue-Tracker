@@ -1,4 +1,4 @@
-import UserDropDown from "./UserDorpDown";
+import UserDropDown from "./UserDropDown";
 
 type AssignUserProps = {
   assignedToUserId: string | null;
