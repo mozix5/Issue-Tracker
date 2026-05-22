@@ -82,33 +82,52 @@ export async function POST(
     },
   });
 
-  // Fetch issue and assignee details
+  // Fetch issue with both assignee and creator
   const issue = await prisma.issue.findUnique({
     where: { id: issueId },
     include: {
-      assignedToUser: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-        }
-      }
-    }
+      assignedToUser: { select: { id: true, name: true, email: true } },
+      createdByUser:  { select: { id: true, name: true, email: true } },
+    },
   });
 
-  if (issue?.assignedToUser && issue.assignedToUser.email && issue.assignedToUser.id !== userId) {
+  const commenterName = session?.user?.name || "Someone";
+  const notified = new Set<string>(); // prevent duplicate emails
+
+  // Notify assignee (unless they are the commenter)
+  if (issue?.assignedToUser?.email && issue.assignedToUser.id !== userId) {
     try {
-      const commenterName = session?.user?.name || "Someone";
       await sendCommentNotification(
         issue.assignedToUser.email,
         issue.assignedToUser.name || "User",
         issueId,
-        issue.title,
+        issue!.title,
+        commenterName,
+        newComment.text
+      );
+      notified.add(issue.assignedToUser.id);
+    } catch (err) {
+      console.error("Failed to send comment email to assignee:", err);
+    }
+  }
+
+  // Notify creator (unless they are the commenter, or already notified as assignee)
+  if (
+    issue?.createdByUser?.email &&
+    issue.createdByUser.id !== userId &&
+    !notified.has(issue.createdByUser.id)
+  ) {
+    try {
+      await sendCommentNotification(
+        issue.createdByUser.email,
+        issue.createdByUser.name || "User",
+        issueId,
+        issue!.title,
         commenterName,
         newComment.text
       );
     } catch (err) {
-      console.error("Failed to send comment email notification:", err);
+      console.error("Failed to send comment email to creator:", err);
     }
   }
 

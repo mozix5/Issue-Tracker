@@ -22,7 +22,8 @@ export async function POST(request: NextRequest) {
     data: { 
       title: body.title, 
       description: body.description,
-      priority: body.priority || "MEDIUM"
+      priority: body.priority || "MEDIUM",
+      createdByUserId: dbUser?.id,
     },
   });
 

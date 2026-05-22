@@ -3,7 +3,7 @@ import { patchIssueSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { sendAssigneeNotification } from "@/lib/mail";
+import { sendAssigneeNotification, sendUnassignedNotification, sendStatusChangeNotification } from "@/lib/mail";
 
 export async function PATCH(
   request: NextRequest,
@@ -31,6 +31,9 @@ export async function PATCH(
 
   const issue = await prisma.issue.findUnique({
     where: { id: parseInt(params.id) },
+    include: {
+      createdByUser: { select: { id: true, name: true, email: true } },
+    },
   });
   if (!issue)
     return NextResponse.json({ error: "Invalid issue" }, { status: 404 });
@@ -114,9 +117,10 @@ export async function PATCH(
     });
   }
 
+  // Notify new assignee
   if (assignedToUserId !== undefined && assignedToUserId !== issue.assignedToUserId && assignedToUserId) {
     const newAssignee = await prisma.user.findUnique({ where: { id: assignedToUserId } });
-    if (newAssignee && newAssignee.email) {
+    if (newAssignee?.email) {
       try {
         await sendAssigneeNotification(
           newAssignee.email,
@@ -126,7 +130,45 @@ export async function PATCH(
           dbUser?.name || "Someone"
         );
       } catch (err) {
-        console.error("Failed to send assignee email notification:", err);
+        console.error("Failed to send assignee email:", err);
+      }
+    }
+  }
+
+  // Notify old assignee when unassigned
+  if (assignedToUserId === null && issue.assignedToUserId) {
+    const oldAssignee = await prisma.user.findUnique({ where: { id: issue.assignedToUserId } });
+    if (oldAssignee?.email) {
+      try {
+        await sendUnassignedNotification(
+          oldAssignee.email,
+          oldAssignee.name || "User",
+          issue.id,
+          updatedIssue.title,
+          dbUser?.name || "Someone"
+        );
+      } catch (err) {
+        console.error("Failed to send unassigned email:", err);
+      }
+    }
+  }
+
+  // Notify creator on status change (skip if they made the change themselves)
+  if (status !== undefined && status !== issue.status) {
+    const creator = issue.createdByUser;
+    if (creator?.email && creator.id !== dbUser?.id) {
+      try {
+        await sendStatusChangeNotification(
+          creator.email,
+          creator.name || "User",
+          issue.id,
+          updatedIssue.title,
+          issue.status,
+          status,
+          dbUser?.name || "Someone"
+        );
+      } catch (err) {
+        console.error("Failed to send status change email:", err);
       }
     }
   }

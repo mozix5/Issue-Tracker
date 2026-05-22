@@ -137,3 +137,77 @@ export const sendCommentNotification = async (
     html,
   });
 };
+
+export const sendUnassignedNotification = async (
+  assigneeEmail: string,
+  assigneeName: string,
+  issueId: number,
+  issueTitle: string,
+  changerName: string
+) => {
+  const appUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
+  const issueUrl = `${appUrl}/issues/${issueId}`;
+
+  const html = `
+    <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0;">
+      <h2 style="color: #64748b; margin-bottom: 16px;">Unassigned from Ticket</h2>
+      <p>Hello <strong>${assigneeName}</strong>,</p>
+      <p><strong>${changerName}</strong> has unassigned you from the following ticket:</p>
+      <div style="background-color: #f8fafc; padding: 16px; border-left: 4px solid #94a3b8; margin: 20px 0; border-radius: 4px;">
+        <h4 style="margin: 0 0 8px 0; font-size: 16px; color: #1e293b;">#${issueId}: ${issueTitle}</h4>
+        <a href="${issueUrl}" style="display: inline-block; background-color: #64748b; color: white; padding: 8px 16px; text-decoration: none; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 8px;">View Issue</a>
+      </div>
+      <p style="font-size: 12px; color: #64748b; margin-top: 32px;">This is an automated notification. Please do not reply directly to this email.</p>
+    </div>
+  `;
+
+  await sendEmail({
+    to: assigneeEmail,
+    subject: `[Unassigned] #${issueId}: ${issueTitle}`,
+    html,
+  });
+};
+
+export const sendStatusChangeNotification = async (
+  creatorEmail: string,
+  creatorName: string,
+  issueId: number,
+  issueTitle: string,
+  oldStatus: string,
+  newStatus: string,
+  changerName: string
+) => {
+  const appUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
+  const issueUrl = `${appUrl}/issues/${issueId}`;
+
+  const statusColors: Record<string, string> = {
+    OPEN: "#3b82f6",
+    IN_PROGRESS: "#f59e0b",
+    CLOSED: "#10b981",
+  };
+  const color = statusColors[newStatus] || "#4f46e5";
+
+  const html = `
+    <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0;">
+      <h2 style="color: ${color}; margin-bottom: 16px;">Issue Status Updated</h2>
+      <p>Hello <strong>${creatorName}</strong>,</p>
+      <p><strong>${changerName}</strong> updated the status of your issue:</p>
+      <div style="background-color: #f8fafc; padding: 16px; border-left: 4px solid ${color}; margin: 20px 0; border-radius: 4px;">
+        <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1e293b;">#${issueId}: ${issueTitle}</h4>
+        <p style="margin: 0; font-size: 13px; color: #64748b;">
+          <span style="text-decoration: line-through;">${oldStatus.replace("_", " ")}</span>
+          &nbsp;→&nbsp;
+          <strong style="color: ${color};">${newStatus.replace("_", " ")}</strong>
+        </p>
+        <a href="${issueUrl}" style="display: inline-block; background-color: ${color}; color: white; padding: 8px 16px; text-decoration: none; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 12px;">View Issue</a>
+      </div>
+      <p style="font-size: 12px; color: #64748b; margin-top: 32px;">This is an automated notification. Please do not reply directly to this email.</p>
+    </div>
+  `;
+
+  await sendEmail({
+    to: creatorEmail,
+    subject: `[Status: ${newStatus.replace("_", " ")}] #${issueId}: ${issueTitle}`,
+    html,
+  });
+};

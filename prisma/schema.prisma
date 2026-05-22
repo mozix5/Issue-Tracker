@@ -17,7 +17,9 @@ model Issue {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
   assignedToUserId String?
-  assignedToUser   User?    @relation(fields: [assignedToUserId], references: [id])
+  assignedToUser   User?    @relation("AssignedIssues", fields: [assignedToUserId], references: [id])
+  createdByUserId  String?
+  createdByUser    User?    @relation("CreatedIssues", fields: [createdByUserId], references: [id])
   comments         Comment[]
   activityLogs     ActivityLog[]
 
@@ -65,7 +67,8 @@ model User {
   image          String?
   accounts       Account[]
   sessions       Session[]
-  assignedIssues Issue[]
+  assignedIssues Issue[]   @relation("AssignedIssues")
+  createdIssues  Issue[]   @relation("CreatedIssues")
   comments       Comment[]
   activityLogs   ActivityLog[]
 
