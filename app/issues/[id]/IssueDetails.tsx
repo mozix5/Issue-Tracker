@@ -50,7 +50,7 @@ const IssueDetails = ({ issueDetails }: { issueDetails: Issue }) => {
           <FileText size={10} />
           <span>Description</span>
         </div>
-        <div className="rounded-2xl bg-base-100/50 px-6 py-5 min-h-24 leading-relaxed prose max-w-none">
+        <div className="rounded-2xl bg-base-100/50 px-6 py-5 min-h-24 leading-relaxed prose max-w-none break-words overflow-x-auto">
           <ReactMarkdown>{issueDetails.description}</ReactMarkdown>
         </div>
       </div>
