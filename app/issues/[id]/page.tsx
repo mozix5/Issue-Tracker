@@ -30,14 +30,14 @@ const IssuePage = async ({ params }: { params: { id: string } }) => {
   return (
     <div className="px-4 md:px-8 max-w-7xl mx-auto py-10 flex flex-col lg:flex-row gap-8 min-h-[90vh] items-start">
 
-      <div className="flex-1 flex flex-col gap-6 min-w-0">
+      <div className="w-full flex-1 flex flex-col gap-6 min-w-0">
         <IssueDetails issueDetails={issue} />
         <ActivityLogSection issueId={issue.id} />
         <CommentsSection issueId={params.id} />
       </div>
 
       {session && (
-        <div className="lg:w-72 shrink-0 flex flex-col gap-4 lg:sticky lg:top-24">
+        <div className="w-full lg:w-72 shrink-0 flex flex-col gap-4 lg:sticky lg:top-24">
 
           <div className="flex items-center gap-2.5 px-1">
             <div className="p-2 rounded-xl bg-primary/10 text-primary">
