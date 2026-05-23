@@ -51,41 +51,121 @@
   }
 }
 
-/* EasyMDE/SimpleMDE Dark Mode adjustments */
-.CodeMirror {
+/* EasyMDE/SimpleMDE Dark Mode adjustments & Caret Visibility Fix */
+.EasyMDEContainer {
+  border: 1px solid hsl(var(--bc) / 0.15) !important;
+  border-radius: 1rem !important;
+  overflow: hidden !important;
   background: hsl(var(--b2)) !important;
-  color: hsl(var(--bc)) !important;
-  border-width: 0 !important;
-  border-style: none !important;
-  min-height: 150px !important;
-}
-
-.CodeMirror .CodeMirror-cursor {
-  border-left-width: 2px !important;
-  border-left-style: solid !important;
-  border-left-color: hsl(var(--bc)) !important;
 }
 
 .editor-toolbar {
-  background: hsl(var(--b3)) !important;
+  background: hsl(var(--b3) / 0.4) !important;
+  backdrop-filter: blur(8px);
   border: none !important;
-  opacity: 0.9;
+  border-bottom: 1px solid hsl(var(--bc) / 0.1) !important;
+  border-radius: 0 !important;
+  padding: 8px 16px !important;
 }
 
 .editor-toolbar button {
   color: hsl(var(--bc)) !important;
+  border-radius: 0.5rem !important;
+  transition: all 0.2s ease !important;
 }
 
 .editor-toolbar button:hover,
 .editor-toolbar button.active {
   background: hsl(var(--b1)) !important;
   border: none !important;
+  color: hsl(var(--p)) !important;
 }
 
+.editor-toolbar i.separator {
+  border-left: 1px solid hsl(var(--bc) / 0.15) !important;
+  border-right: none !important;
+  margin: 0 6px !important;
+}
+
+.CodeMirror {
+  background: transparent !important;
+  color: hsl(var(--bc)) !important;
+  border: none !important;
+  min-height: 180px !important;
+  font-family: inherit !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+  padding: 16px 20px !important;
+}
+
+/* Ensure the cursor is visible in Chrome and Safari by using currentColor and preventing overlap clipping */
+.CodeMirror-cursor {
+  border-left: 2px solid currentColor !important;
+  border-right: none !important;
+  width: 0 !important;
+}
+
+/* Better styling for selected text/selection */
+.CodeMirror-selected {
+  background: hsl(var(--p) / 0.25) !important;
+}
+
+/* Style the markdown preview beautifully using Tailwind Typography (prose) */
 .editor-preview {
+  @apply prose max-w-none;
   background: hsl(var(--b2)) !important;
   color: hsl(var(--bc)) !important;
   border: none !important;
+  padding: 24px !important;
+}
+
+/* CodeMirror inline formatting styles */
+.CodeMirror .cm-header {
+  font-family: inherit !important;
+  font-weight: 800 !important;
+  color: hsl(var(--bc)) !important;
+}
+.CodeMirror .cm-header-1 { font-size: 1.4em !important; }
+.CodeMirror .cm-header-2 { font-size: 1.25em !important; }
+.CodeMirror .cm-header-3 { font-size: 1.15em !important; }
+
+.CodeMirror .cm-strong {
+  font-weight: 700 !important;
+  color: hsl(var(--bc)) !important;
+}
+
+.CodeMirror .cm-em {
+  font-style: italic !important;
+}
+
+.CodeMirror .cm-comment {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  background: hsl(var(--b3) / 0.6) !important;
+  color: hsl(var(--p)) !important;
+  padding: 2px 6px !important;
+  border-radius: 6px !important;
+  font-size: 0.85em !important;
+}
+
+.CodeMirror .cm-link {
+  color: hsl(var(--p)) !important;
+  text-decoration: underline !important;
+}
+
+.CodeMirror .cm-quote {
+  font-style: italic !important;
+  color: hsl(var(--bc) / 0.6) !important;
+  border-left: 4px solid hsl(var(--bc) / 0.2) !important;
+  padding-left: 8px !important;
+}
+
+.editor-statusbar {
+  color: hsl(var(--bc) / 0.5) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  padding: 8px 20px !important;
+  background: hsl(var(--b2)) !important;
+  border-top: 1px solid hsl(var(--bc) / 0.05) !important;
 }
 
 /* Tailwind Typography Theme integration */
