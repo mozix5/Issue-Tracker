@@ -93,7 +93,7 @@
   border: none !important;
   min-height: 180px !important;
   font-family: inherit !important;
-  font-size: 0.95rem !important;
+  font-size: 0.875rem !important;
   line-height: 1.6 !important;
   padding: 16px 20px !important;
 }
@@ -112,7 +112,7 @@
 
 /* Style the markdown preview beautifully using Tailwind Typography (prose) */
 .editor-preview {
-  @apply prose max-w-none;
+  @apply prose prose-sm max-w-none;
   background: hsl(var(--b2)) !important;
   color: hsl(var(--bc)) !important;
   border: none !important;
@@ -125,9 +125,9 @@
   font-weight: 800 !important;
   color: hsl(var(--bc)) !important;
 }
-.CodeMirror .cm-header-1 { font-size: 1.4em !important; }
-.CodeMirror .cm-header-2 { font-size: 1.25em !important; }
-.CodeMirror .cm-header-3 { font-size: 1.15em !important; }
+.CodeMirror .cm-header-1 { font-size: 1.3em !important; }
+.CodeMirror .cm-header-2 { font-size: 1.2em !important; }
+.CodeMirror .cm-header-3 { font-size: 1.1em !important; }
 
 .CodeMirror .cm-strong {
   font-weight: 700 !important;
