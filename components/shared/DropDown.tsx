@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTransition } from "react";
 
 type DropDownProps = {
   options: { id: string; label: string }[];
@@ -15,6 +16,7 @@ type DropDownProps = {
   placeholder?: string;
   className?: string;
   query: string;
+  disabled?: boolean;
 };
 const DropDown = ({
   options,
@@ -22,9 +24,11 @@ const DropDown = ({
   defaultValue,
   className,
   query,
+  disabled,
 }: DropDownProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
   const currentValue = searchParams.get(query) || defaultValue;
 
   const handleQueryChange = (value: string) => {
@@ -34,10 +38,15 @@ const DropDown = ({
     } else {
       params.set(query, value);
     }
-    router.push("?" + params.toString());
+    if (query !== "page") {
+      params.delete("page");
+    }
+    startTransition(() => {
+      router.push("?" + params.toString());
+    });
   };
   return (
-    <Select defaultValue={currentValue} onValueChange={handleQueryChange}>
+    <Select value={currentValue} onValueChange={handleQueryChange} disabled={disabled || isPending}>
       <SelectTrigger className={`capitalize ${className}`}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
